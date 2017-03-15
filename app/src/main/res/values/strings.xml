@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EatFinder</string>
+    <string name="app_name">The Restaurant Finder</string>
     <string name="text_popular">Popular</string>
     <string name="text_category">Category</string>
     <string name="text_location">Location</string>
