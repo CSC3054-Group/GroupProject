@@ -244,7 +244,8 @@
             android:drawableTop="@mipmap/ic_phone"
             android:gravity="center"
             android:text="@string/text_call"
-            android:textColor="#929292" />
+            android:textColor="#929292"
+            />
 
         <RadioButton
             android:id="@+id/rButton_category"
