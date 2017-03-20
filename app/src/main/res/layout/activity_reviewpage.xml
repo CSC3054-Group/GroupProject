@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.groupwork.activity.Reviewpage"
+    android:background="@drawable/rest">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review this Restaurant"
+        android:id="@+id/textView2"
+        android:layout_marginTop="94dp"
+        android:textColor="#fffcfc"
+        android:textSize="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Say something about this restaurant..."
+        android:id="@+id/textView3"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/textView2"
+        android:textSize="25dp"
+        android:textColor="#fdfdfd" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/editText"
+        android:layout_below="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:text="please type here.."
+        android:layout_alignParentEnd="true"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingPrice"
+        style="@android:style/Widget.Holo.RatingBar.Indicator"
+        android:numStars="5"
+        android:layout_above="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:id="@+id/button"
+        android:layout_marginTop="54dp"
+        android:background="#b1b1b1"
+        android:textSize="20dp"
+        android:layout_below="@+id/editText"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
