@@ -4,4 +4,8 @@
     <string name="text_category">Category</string>
     <string name="text_location">Location</string>
     <string name="text_user">User</string>
+    <string name="text_call">Call</string>
+    <string name="text_map">Map</string>
+    <string name="text_review">Review</string>
+    <string name="text_save">Save</string>
 </resources>
