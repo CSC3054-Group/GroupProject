@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CircleImageView Custom Styling -->
+    <declare-styleable name="CircleImageView">
+
+        <!-- The background color for image, if image has transparent part -->
+        <attr name="view_backgroundColor" format="color"/>
+        <!-- The color of the border draw around the image. (if enabled) -->
+        <attr name="view_borderColor" format="color"/>
+        <!-- The width of border. (if enabled) -->
+        <attr name="view_borderWidth" format="dimension"/>
+        <!-- The color of the border, when image is selected. (if enabled)  -->
+        <attr name="view_selectedColor" format="color" />
+
+        <!-- The radius of shadow -->
+        <attr name="view_shadowRadius" format="dimension"/>
+        <!-- Horizontal shadow offset -->
+        <attr name="view_shadowDx" format="dimension"/>
+        <!-- Vertical shadow offset -->
+        <attr name="view_shadowDy" format="dimension"/>
+        <!-- The color of shadow -->
+        <attr name="view_shadowColor" format="color"/>
+
+        <!-- The radius of pressed animated ring -->
+        <attr name="view_pressedRingWidth" format="dimension"/>
+        <!-- The color of pressed animated ring -->
+        <attr name="view_pressedRingColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageViewStyle">
+        <attr name="circleImageViewDefault" format="reference"/>
+    </declare-styleable>
+</resources>
