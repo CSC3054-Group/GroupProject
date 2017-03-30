@@ -15,6 +15,7 @@ public class MysqlHelper {
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url,user,password);
+
 			if(!con.isClosed()){
 				//System.out.println("Succeed");
 			}
