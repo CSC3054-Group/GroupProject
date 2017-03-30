@@ -25,10 +25,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.Register" />
         <activity android:name=".RestaurantDetails" />
         <activity android:name=".UserHome"></activity>
+        <activity android:name=".activity.SearchActivity"></activity>
+
     </application>
 
 </manifest>
