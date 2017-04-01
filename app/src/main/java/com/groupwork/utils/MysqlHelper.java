@@ -1,4 +1,6 @@
 package com.groupwork.utils;
+import android.util.Log;
+
 import java.sql.*;
 
 public class MysqlHelper {
@@ -18,13 +20,16 @@ public class MysqlHelper {
 
 			if(!con.isClosed()){
 				//System.out.println("Succeed");
+				Log.d("Test","connect succeed");
 			}
 			else{
 				System.out.println("Failed");
+				Log.d("Test","connect Failed");
 			}
 		}
 		catch(ClassNotFoundException e){
 			System.out.println("Sorry can't find the Driver");
+			Log.d("Test","sorry can't find the driver");
 			e.printStackTrace();
 			
 		}catch(Exception e){

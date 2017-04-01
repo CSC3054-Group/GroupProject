@@ -5,5 +5,7 @@ package com.groupwork.urlContrans;
  */
 
 public class UrlConfig {
+    public static final String Socket_IP ="52.56.230.232";
+    public static final int Socket_PORT =12345;
 
 }
