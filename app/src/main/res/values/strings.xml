@@ -2,7 +2,7 @@
     <string name="app_name">The Restaurant Finder</string>
     <string name="text_popular">Popular</string>
     <string name="text_category">Category</string>
-    <string name="text_location">Location</string>
+    <string name="text_location">Nearby</string>
     <string name="text_user">User</string>
     <string name="text_call">Call</string>
     <string name="text_map">Map</string>

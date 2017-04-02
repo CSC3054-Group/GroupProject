@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:checkedButton="@+id/rButton_popular"
+        android:checkedButton="@+id/rButton_Nearby"
         android:orientation="horizontal">
 
         <RadioButton
@@ -42,7 +42,7 @@
             android:textColor="@color/slt_btn_color" />
 
         <RadioButton
-            android:id="@+id/rButton_location"
+            android:id="@+id/rButton_Nearby"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
