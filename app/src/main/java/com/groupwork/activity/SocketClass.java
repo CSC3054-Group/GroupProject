@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.groupwork.R;
 import com.groupwork.urlContrans.UrlConfig;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -64,7 +67,7 @@ public class SocketClass extends AppCompatActivity {
                             OutputStream out = socket.getOutputStream();
                             PrintWriter pw = new PrintWriter(out);
                             //Input sql sentence which you want to execute
-                            String sqlString = "select * from tbl_users where UserId=" + id_number;
+                            String sqlString = "select * from tbl_users";
                             pw.write(sqlString);
                             pw.flush();
                             socket.shutdownOutput();
@@ -84,6 +87,86 @@ public class SocketClass extends AppCompatActivity {
                             //socket.shutdownInput();
 
                             Log.d("Test", info);
+                            /**
+                             * Json analyse
+                             * [
+                             {
+                             "Email": "gcunningham12@qub.ac.uk",
+                             "UserId": "1",
+                             "Forename": "Gerard",
+                             "Title": "Mr",
+                             "UserPassword": "password123",
+                             "Middlename": "Anthony",
+                             "Surname": "Cunningham",
+                             "Postcode": "BT344HR",
+                             "SecurityQuestion": "Place Of Birth",
+                             "SecurityAnswer": "Newry"
+                             },
+                             {
+                             "Email": "jmccully03@qub.ac.uk",
+                             "UserId": "6",
+                             "Forename": "Jamie",
+                             "Title": "Mr",
+                             "UserPassword": "password123",
+                             "Middlename": "Ryan ",
+                             "Surname": "McCully",
+                             "Postcode": "BT455HR",
+                             "SecurityQuestion": "Place Of Birth",
+                             "SecurityAnswer": "Belfast"
+                             },
+                             {
+                             "Email": "hwilson20@qub.ac.uk",
+                             "UserId": "7",
+                             "Forename": "Harry ",
+                             "Title": "Mr",
+                             "UserPassword": "password123",
+                             "Middlename": "Jamie",
+                             "Surname": "Wilson",
+                             "Postcode": "BT367RD",
+                             "SecurityQuestion": "Place Of Birth",
+                             "SecurityAnswer": "Belfast"
+                             },
+                             {
+                             "Email": "l@qub.ac.uk",
+                             "UserId": "8",
+                             "Forename": "Jianyu",
+                             "Title": "Mr ",
+                             "UserPassword": "password123",
+                             "Middlename": "R",
+                             "Surname": "Li",
+                             "Postcode": "BT321SE",
+                             "SecurityQuestion": "Place Of Birth",
+                             "SecurityAnswer": "Belfast"
+                             },
+                             {
+                             "Email": "r@qub.ac.uk",
+                             "UserId": "9",
+                             "Forename": "Lei",
+                             "Title": "Mr ",
+                             "UserPassword": "password123",
+                             "Middlename": "R",
+                             "Surname": "Tong",
+                             "Postcode": "BT321RS",
+                             "SecurityQuestion": "Place Of Birth",
+                             "SecurityAnswer": "Belfast"
+                             }
+                             ]
+                             *
+                             * */
+                             JSONArray array= new JSONArray(info);
+                            for(int i=0;i<array.length();i++){
+                                JSONObject object=array.getJSONObject(i);
+                                String Email=object.getString("Email");
+                                int UserId=object.getInt("UserId");
+                                String ForeName=object.getString("Forename");
+                                String Title=object.getString("Title");
+                                String Middlename=object.getString("Middlename");
+                                String Surname=object.getString("Surname");
+                                Log.d("Test2",Email+" "+UserId+" "+ForeName+" "+Title+" "+
+                                        Middlename+" "+Surname);
+                                //Log.d("Test2",Email+);
+                            }
+                            Log.d("Test2","successful");
 
 
                             //Set result to textview
