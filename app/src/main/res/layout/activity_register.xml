@@ -13,107 +13,183 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_height="110dp"
         app:srcCompat="@drawable/logotwo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:id="@+id/et_uname_reg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundededittext"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textStyle="bold"
-
-        />
-
-    <EditText
-        android:id="@+id/et_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/et_uname_reg"
-        android:layout_below="@+id/et_uname_reg"
-        android:layout_marginTop="13dp"
-        android:background="@drawable/roundededittext"
-        android:ems="10"
-        android:hint="Email Address"
-        android:inputType="textPersonName"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/et_pword_reg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_email"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:textAlignment="textStart"
-        android:textStyle="bold"
-        android:hint="Password"
-        android:textColorHint="#FFFFFF"
-        android:background="@drawable/roundededittext"
-        />
-
-    <EditText
-        android:id="@+id/et_con_pass_reg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/et_pword_reg"
-        android:layout_below="@+id/et_pword_reg"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColor="#FFFFFF"
-        android:textAlignment="textStart"
-        android:textStyle="bold"
-        android:hint="Confirm Password"
-        android:textColorHint="#FFFFFF"
-        android:background="@drawable/roundededittext"
-        />
-
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="270dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/et_con_pass_reg"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/buttonshape"
-        android:text="Register"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        />
 
     <TextView
         android:id="@+id/tv_existingaccount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_register"
-        android:layout_marginTop="11dp"
+      android:layout_height="wrap_content"
+
         android:text="Already Have An Account? Click Here To Login"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        app:srcCompat="@drawable/user1"
+        android:id="@+id/iv_forename"
+        android:layout_marginEnd="29dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/logo"
+        android:layout_marginTop="95dp" />
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        app:srcCompat="@drawable/user1"
+        android:id="@+id/imageView4"
+        android:layout_below="@+id/iv_forename"
+        android:layout_alignStart="@+id/iv_forename" />
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        app:srcCompat="@drawable/password"
+        android:layout_marginTop="45dp"
+        android:id="@+id/imageView6"
+        android:layout_below="@+id/imageView5"
+        android:layout_alignStart="@+id/imageView5"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:text="Check Email Availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView5"
+        android:layout_marginTop="14dp"
+        android:id="@+id/tv_verifyemail"
+        android:layout_alignEnd="@+id/et_forename"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="19sp"
+        android:layout_toEndOf="@+id/imageView6" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/et_forename"
+        android:textColor="@android:color/white"
+        android:background="@drawable/roundededittext"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:hint="Forename"
+        android:textColorHint="@color/White"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/et_surname"
+        android:background="@drawable/roundededittext"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_above="@+id/imageView5"
+        android:layout_marginBottom="12dp"
+        android:layout_alignEnd="@+id/et_forename"
+        android:hint="Surname"
+        android:textColorHint="@color/White"
+        />
+
+
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        app:srcCompat="@drawable/emailcon"
+        android:id="@+id/imageView5"
+        android:layout_below="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/et_emailaddress"
+        android:hint="Email Address"
+        android:textColorHint="@color/White"
+        android:textColor="@android:color/white"
+        android:background="@drawable/roundededittext"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_above="@+id/imageView6"
+        android:layout_toEndOf="@+id/imageView5" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_above="@+id/imageView7"
+        android:layout_alignStart="@+id/et_surname"
+        android:id="@+id/et_securityquestion"
+        android:layout_alignEnd="@+id/tv_verifyemail"
+        android:hint="What Is Your Favourite City"
+        android:textColorHint="@color/White"
+        android:textColor="@android:color/white"
+        android:background="@drawable/roundededittext"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/et_password"
+        android:textColorHint="@color/White"
+        android:textColor="@android:color/white"
+        android:background="@drawable/roundededittext"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:hint="Password"
+
+        android:layout_alignBottom="@+id/imageView7"
+        android:layout_toEndOf="@+id/imageView7"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="57dp"
+        app:srcCompat="@drawable/password"
+        android:id="@+id/imageView7"
+        android:layout_below="@+id/imageView6"
+        android:layout_alignStart="@+id/imageView6"
+        android:visibility="invisible"/>
+
+    <Button
+        android:text="Register"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/tv_existingaccount"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_register"
+        android:background="@drawable/buttonshape"
+        android:textAllCaps="false"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:visibility="invisible"
         />
 
 
