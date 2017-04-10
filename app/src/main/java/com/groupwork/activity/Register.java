@@ -67,6 +67,21 @@ public class Register extends AppCompatActivity {
 
     //Handler to control the register button
 
+    Handler Registerhandler = new Handler(){
+
+        public void handleMessage(Message msg) {
+            String text = msg.obj.toString();
+            //textview feedback
+            Log.d("Test2",text);
+            if(text.equals("RegisterSuccess"))
+            {
+                Intent register = new Intent(Register.this, Login.class);
+                startActivity(register);
+            }
+
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -231,7 +246,7 @@ public class Register extends AppCompatActivity {
 
                     if(fname.equals("")||sname.equals("")|| emailaddress.equals("")|| securityquestionanswer.equals("") || Password.equals("") )
                     {
-                        //
+
                         Toast.makeText(getApplication(), "You Have Not Filled In All Fields", Toast.LENGTH_LONG).show();
 
                     }
@@ -249,12 +264,18 @@ public class Register extends AppCompatActivity {
                                     OutputStream out = socket.getOutputStream();
                                     PrintWriter pw = new PrintWriter(out);
                                     //Input sql sentence which you want to execute
-                                    String sqlString = "insert into tbl_users(Forename,Surname,Email,UserPassword,SecurityQuestion)" +
-                                            "values('"+fname+"','"+sname+"','"+emailaddress+"','"+Password+"','"+securityquestionanswer+"')";
+                                    String sqlString = "insert into tbl_users(Forename,Surname,Email,UserPassword,SecurityQuestion,SecurityAnswer)" +
+                                            "values('"+fname+"','"+sname+"','"+emailaddress+"','"+Password+"','What Is Your Favourite City','"+securityquestionanswer+"')";
                                     pw.write(sqlString);
                                     pw.flush();
                                     socket.shutdownOutput();
                                     Log.d("Test", "transport successfully");
+
+                                    Message message = Message.obtain();
+                                    message.obj = "RegisterSuccess";
+                                    message.what = 1;  // obj and what is similar as value-key
+                                    Registerhandler.sendMessage(message);// send message to handler
+
 
                                 } catch (Exception e) {
 
