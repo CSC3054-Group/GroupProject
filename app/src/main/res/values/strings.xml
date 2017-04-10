@@ -8,4 +8,10 @@
     <string name="text_map">Map</string>
     <string name="text_review">Review</string>
     <string name="text_save">Save</string>
+    <string-array name="Titles">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Ms</item>
+        <item>Miss</item>
+    </string-array>
 </resources>
