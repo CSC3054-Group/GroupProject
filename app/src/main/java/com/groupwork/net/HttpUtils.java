@@ -55,9 +55,9 @@ public class HttpUtils {
             //打开Http 连接(open Http connection)
             conn=(HttpURLConnection) url.openConnection();
             //设置连接超时(Set the connection timeout)
-            conn.setConnectTimeout(5*1000);
+            conn.setConnectTimeout(50*1000);
             //设置读取超时(set the read timeout)
-            conn.setReadTimeout(5*1000);
+            conn.setReadTimeout(50*1000);
 
             //判断连接是否成功(Determine if the connection is successful)
             if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){

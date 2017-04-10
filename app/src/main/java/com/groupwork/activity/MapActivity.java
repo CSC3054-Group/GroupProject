@@ -3,18 +3,27 @@ package com.groupwork.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
@@ -29,6 +38,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.groupwork.R;
+import com.groupwork.bean.NearbyItem;
+import com.groupwork.urlContrans.UrlConfig;
+import com.groupwork.utils.ParserJson;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by admin on 2017/3/1.
@@ -37,15 +62,55 @@ import com.groupwork.R;
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     public static final int LOCATION_UPDATE_MIN_DISTANCE = 10;
     public static final int LOCATION_UPDATE_MIN_TIME = 5000;
-
+    private String RestaurantId;
+    private int[] PhotoId={R.drawable.costa,R.drawable.boojum,R.drawable.bootleggers,R.drawable.empire
+            ,R.drawable.ashers,R.drawable.nero,R.drawable.villa,R.drawable.madisons,R.drawable.starbucks,R.drawable.kaffe,
+            R.drawable.mcdonald,R.drawable.kfc,R.drawable.burgerking,R.drawable.deanes,R.drawable.jamesstreetsouth
+            ,R.drawable.ritas,R.drawable.fivepoints,R.drawable.laverys,R.drawable.woodworkers,R.drawable.bobandberts,
+            R.drawable.maggiemays};
     private MapFragment map_Fragemnt;
     private GoogleMap mMap;
     private double get_latititude;
     private double get_longtitute;
     final static int MY_LOCATION_REQUEST_CODE = 456;
 
+    private LinearLayout mapItem_layout;
+    private ImageView mapItem_img;
+    private TextView mapItem_resName,mapItem_resType,mapItem_resDuration;
+    private RatingBar mapItem_rating;
+    private Marker[] markers;
+    private List<NearbyItem> nearList;
 
+    private Button maptitle_back;
 
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            if(msg.obj.toString().equals("update")) {
+                markers = new Marker[nearList.size()];
+                for (int i = 0; i < nearList.size(); i++) {
+                    String resLocation = nearList.get(i).getResLoaction();
+                    double latitude = 0;
+                    double altitude = 0;
+                    for (int j = 0; j < resLocation.length(); j++) {
+                        if (resLocation.substring(j, j + 1).equals(",")) {
+
+                            latitude = Double.valueOf(resLocation.substring(0, j));
+                            altitude = Double.valueOf(resLocation.substring(j + 1, resLocation.length()));
+
+                            break;
+                        }
+                    }
+
+                        markers[i] = mMap.addMarker(new MarkerOptions().
+                                position(new LatLng(latitude, altitude)).
+                                icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal)));
+
+                }
+            }
+            return false;
+        }
+    });
     private android.location.LocationListener mlocationListener = new android.location.LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -76,19 +141,49 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         setContentView(R.layout.singlepoint_map);
 
         try {
+            InitialView();
             initilizeMap();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    private void InitialView(){
+        mapItem_layout = (LinearLayout) findViewById(R.id.mapresItem_layout);
+        mapItem_img = (ImageView) findViewById(R.id.maplist_photo);
+        mapItem_rating = (RatingBar) findViewById(R.id.map_rating);
+        mapItem_resName = (TextView) findViewById(R.id.maptext_resName);
+        mapItem_resType = (TextView) findViewById(R.id.map_resType);
+        mapItem_resDuration = (TextView) findViewById(R.id.map_duration);
+        getCuttentLocation();
+        nearList = new ArrayList<>();
+        mapItem_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getVisibility()==View.VISIBLE){
+                    Intent intent= new Intent(MapActivity.this,IntentTest.class);
+                    intent.putExtra("resName",mapItem_resName.getText());
+                    startActivity(intent);
+                }
+            }
+        });
+        maptitle_back = (Button) findViewById(R.id.mapTitle_back);
+        maptitle_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MapActivity.this,MainLayoutActivity.class);
+                startActivity(intent);
+            }
+        });
 
+    }
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
-
+        new Thread(new RestaurantsThread()).start();
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(get_latititude, get_longtitute), 13));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-
             return;
         } else {
             ActivityCompat.requestPermissions(this,
@@ -115,43 +210,34 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        // add Marker
-        final Marker res_Marker = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .position(new LatLng(54.58013166666667, -5.940546666666667)));
-        final Marker res_Marker1 = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .position(new LatLng(54.58013166666667, -7.940546666666667)));
-        final Marker res_Marker2 = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .position(new LatLng(56.58013166666667, -8.940546666666667)));
-        final Marker res_Marker3 = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .position(new LatLng(53.58013166666667, -4.940546666666667)));
-        final Marker res_Marker4 = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .position(new LatLng(52.58013166666667, -5.740546666666667)));
-        final Marker res_Marker5 = googleMap.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .position(new LatLng(50.58013166666667, -5.840546666666667)));
+
+
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Log.d("Marker_position","marker_p="+marker.getPosition().toString());
-                Log.d("Marker_position","Id="+marker.getId());
-                Log.d("Marker_position","resmarker_p="+res_Marker.getPosition().toString());
-                Log.d("Marker_position","Id="+res_Marker.getId());
-                if(marker.getId().equals(res_Marker.getId())){
-                    res_Marker.setIcon(BitmapDescriptorFactory.
-                            fromResource(R.drawable.res_icon_click));
-                    Toast.makeText(MapActivity.this,"click me ",Toast.LENGTH_SHORT).show();
+                for(int i=0;i<markers.length;i++){
+
+                    if(marker.getId().equals(markers[i].getId())){
+                        markers[i].setIcon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_click));
+                        mapItem_layout.setVisibility(View.VISIBLE);
+                        int resId = nearList.get(i).getResId();
+                        RestaurantId = String.valueOf(resId);
+
+                        mapItem_resName.setText(nearList.get(i).getResName());
+                        mapItem_rating.setRating(nearList.get(i).getRating());
+                        mapItem_resType.setText("Restaurant Type: "+nearList.get(i).getResType());
+                        DecimalFormat format =new DecimalFormat("0.0");
+                        mapItem_resDuration.setText("From the current location: "+format.format(nearList.get(i).getDuration())+"km");
+                        if(resId>=1&&resId<=10){
+                            mapItem_img.setImageResource(PhotoId[resId-1]);
+                        }
+                        else if (resId>=21&&resId<=31){
+                            mapItem_img.setImageResource(PhotoId[resId-11]);
+                        }
+                    }else{
+                        markers[i].setIcon(BitmapDescriptorFactory.fromResource(R.drawable.res_icon_normal));
+                    }
                 }
 
 
@@ -160,9 +246,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        UiSettings uiSettings = googleMap.getUiSettings();
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setZoomControlsEnabled(true);
+
     }
 
     @Override
@@ -234,6 +318,70 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 mMap.setMyLocationEnabled(true);
             }
 
+        }
+    }
+
+    class RestaurantsThread implements Runnable{
+        Socket socket=null;
+        @Override
+        public void run() {
+            try{
+                int count=1;
+                socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                //Output data to Server
+                OutputStream out = socket.getOutputStream();
+                PrintWriter pw = new PrintWriter(out);
+                //Input sql sentence which you want to execute
+                String sqlString = "select tbl_restaurants.restId,resLocation,tbl_restaurants.resName," +
+                        "AVG(revStarRating),resType,resPhoto from tbl_restaurants,tbl_restype,tbl_reviews " +
+                        "where tbl_restaurants.restId=tbl_reviews.restId " +
+                        "and tbl_restaurants.resTypeId=tbl_restype.resTypeId " +
+                        "GROUP BY tbl_restaurants.restId";
+                pw.write(sqlString);
+                pw.flush();
+                socket.shutdownOutput();
+
+                //get response from server
+
+                InputStream is = socket.getInputStream();
+                InputStreamReader isr =new InputStreamReader(is);
+                BufferedReader br =new BufferedReader(isr);
+                String info = "";
+                String line = null;
+                while((line=br.readLine())!=null){
+                    info = info + line;
+                }
+
+                if(!info.equals("")&&!info.isEmpty()){
+
+
+                    nearList=  ParserJson.parserJsonNeayBy(info,get_latititude,get_longtitute);
+
+                    Message msg =new Message();
+                    msg.obj="update";
+                    msg.what=1;
+                    handler.sendMessage(msg);
+
+                }
+            }catch (Exception e){
+
+            }finally {
+                if(socket!=null){
+                    try {
+                        socket.close();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try {
+                    socket.shutdownInput();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
     }
 

@@ -3,6 +3,7 @@ package com.groupwork.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 import com.groupwork.R;
 import com.groupwork.asyncTask.DownloadAsyncTask;
 import com.groupwork.bean.NearbyItem;
+import com.groupwork.urlContrans.UrlConfig;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,11 @@ import java.util.List;
 public class NearbyListAdapter extends BaseAdapter {
     private List<NearbyItem> list;
     private Context context;
-
+    private int[] PhotoId={R.drawable.costa,R.drawable.boojum,R.drawable.bootleggers,R.drawable.empire
+    ,R.drawable.ashers,R.drawable.nero,R.drawable.villa,R.drawable.madisons,R.drawable.starbucks,R.drawable.kaffe,
+    R.drawable.mcdonald,R.drawable.kfc,R.drawable.burgerking,R.drawable.deanes,R.drawable.jamesstreetsouth
+    ,R.drawable.ritas,R.drawable.fivepoints,R.drawable.laverys,R.drawable.woodworkers,R.drawable.bobandberts,
+    R.drawable.maggiemays};
     public NearbyListAdapter(List<NearbyItem> list, Context context) {
         this.list = list;
         this.context = context;
@@ -58,25 +65,41 @@ public class NearbyListAdapter extends BaseAdapter {
             viewHolder.res_type= (TextView) convertView.findViewById(R.id.list_resType);
             viewHolder.res_duration= (TextView) convertView.findViewById(R.id.list_duration);
             convertView.setTag(viewHolder);
+            Log.d("Test","new adapter");
         }else{
             viewHolder= (ViewHolder) convertView.getTag();
         }
-        String cover_Img=list.get(position).getRes_img();
+
+        //String cover_Img= UrlConfig.URL_PHOTO_DETAILS+"&photoreference="+list.get(position).getRes_img();
         String cover_name=list.get(position).getResName();
-        int cover_rating=list.get(position).getRating();
+        float cover_rating=list.get(position).getRating();
         String cover_type=list.get(position).getResType();
-        float cover_duration=list.get(position).getDuration();
+        double cover_duration=list.get(position).getDuration();
+        int resId = list.get(position).getResId();
+
+        if(resId>=1&&resId<=10){
+            viewHolder.res_photo.setImageResource(PhotoId[resId-1]);
+        }
+        else if (resId>=21&&resId<=31){
+            viewHolder.res_photo.setImageResource(PhotoId[resId-11]);
+        }
         viewHolder.res_Name.setText(cover_name);
         viewHolder.res_rating.setRating(cover_rating);
         viewHolder.res_type.setText("Restaurant Type: "+cover_type);
-        viewHolder.res_duration.setText("From the current location: "+cover_duration);
-        new DownloadAsyncTask(context,new DownloadAsyncTask.OnResultListener() {
-            @Override
-            public void OnResult(byte[] result) {
-                Bitmap bitmapFactory=BitmapFactory.decodeByteArray(result,0,result.length);
-                viewHolder.res_photo.setImageBitmap(bitmapFactory);
-            }
-        }).execute(cover_Img);
+        DecimalFormat format =new DecimalFormat("0.0");
+        viewHolder.res_duration.setText("From the current location: "+format.format(cover_duration)+"km");
+//        if(cover_Img!=null) {
+//            new DownloadAsyncTask(context, new DownloadAsyncTask.OnResultListener() {
+//                @Override
+//                public void OnResult(byte[] result) {
+//                    Bitmap bitmapFactory = BitmapFactory.decodeByteArray(result, 0, result.length);
+//
+//                    viewHolder.res_photo.setImageBitmap(bitmapFactory);
+//
+//                }
+//            }).execute(cover_Img);
+//        }
+
         return convertView;
     }
     class ViewHolder{

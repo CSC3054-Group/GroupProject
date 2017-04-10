@@ -8,27 +8,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <SearchView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:textColor="#fff"
-        android:queryHint="Search Restaurant By Name"
-        android:id="@+id/searchView_nearby"
-        android:iconifiedByDefault="false"
-        android:background="#fff"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="3dp"
-        />
+        <SearchView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="#fff"
+            android:queryHint="Search By Name"
+            android:id="@+id/searchView_nearby"
+            android:iconifiedByDefault="false"
+            android:background="#fff"
+
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Map"
-            android:textSize="32sp"
+            android:gravity="center"
+            android:textSize="28sp"
             android:textColor="#fff"
             android:id="@+id/maptext_nearby"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             />
     </LinearLayout>
 </RelativeLayout>

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:checkedButton="@+id/rButton_Nearby"
+        android:checkedButton="@+id/rButton_popular"
         android:orientation="horizontal">
 
         <RadioButton

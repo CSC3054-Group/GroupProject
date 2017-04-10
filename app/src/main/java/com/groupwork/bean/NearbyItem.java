@@ -4,31 +4,33 @@ package com.groupwork.bean;
  * Created by admin on 2017/4/2.
  */
 
-public class NearbyItem implements Comparable<NearbyItem>{
+public class NearbyItem {
     private int resId;
     private String resLoaction;
     private String res_img;
     private String resName;
-    private int rating;
+    private float rating;
     private String resType;
-    private float duration;
+    private String duration_text;
+    private double duration;
 
-    public NearbyItem(int resId, String resLoaction, String res_img, String resName, int rating, String resType, float duration) {
+    public NearbyItem(int resId, String resLoaction, String res_img, String resName, String resType, float rating, String duration_text, double duration) {
         this.resId = resId;
         this.resLoaction = resLoaction;
         this.res_img = res_img;
         this.resName = resName;
-        this.rating = rating;
         this.resType = resType;
+        this.rating = rating;
+        this.duration_text = duration_text;
         this.duration = duration;
     }
 
-    public String getResLoaction() {
-        return resLoaction;
+    public String getDuration_text() {
+        return duration_text;
     }
 
-    public void setResLoaction(String resLoaction) {
-        this.resLoaction = resLoaction;
+    public void setDuration_text(String duration_text) {
+        this.duration_text = duration_text;
     }
 
     @Override
@@ -40,8 +42,17 @@ public class NearbyItem implements Comparable<NearbyItem>{
                 ", resName='" + resName + '\'' +
                 ", rating=" + rating +
                 ", resType='" + resType + '\'' +
+                ", duration_text='" + duration_text + '\'' +
                 ", duration=" + duration +
                 '}';
+    }
+
+    public String getResLoaction() {
+        return resLoaction;
+    }
+
+    public void setResLoaction(String resLoaction) {
+        this.resLoaction = resLoaction;
     }
 
     public int getResId() {
@@ -68,11 +79,11 @@ public class NearbyItem implements Comparable<NearbyItem>{
         this.resName = resName;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -84,17 +95,14 @@ public class NearbyItem implements Comparable<NearbyItem>{
         this.resType = resType;
     }
 
-    public float getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(float duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 
-    @Override
-    public int compareTo(NearbyItem o) {
 
-        return (int) (this.duration-o.getDuration());
-    }
+
 }

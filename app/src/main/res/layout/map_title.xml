@@ -8,27 +8,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="#ffff"
-        android:text="Location Name"
-        android:textSize="21sp"
+        android:text="Surrounding"
+        android:textSize="25sp"
         android:id="@+id/mapTitle_name"
         android:gravity="center_horizontal|center"
         android:singleLine="true"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:text="GO HERE"
-        android:background="@color/colorPrimary"
-        android:textColor="#ffff"
-        android:textSize="18sp"
-        android:layout_marginRight="10dp"
-        android:gravity="center_vertical"
-        />
+
 
     <Button
-        android:layout_width="40dp"
+        android:layout_width="30dp"
         android:layout_height="match_parent"
         android:background="@drawable/back_bt"
         android:id="@+id/mapTitle_back"
