@@ -31,7 +31,6 @@
         <activity android:name=".RestaurantDetails"/>
         <activity android:name=".UserHome"/>
         <activity android:name=".activity.SearchActivity"></activity>
-        <activity android:name=".activity.SocketClass"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

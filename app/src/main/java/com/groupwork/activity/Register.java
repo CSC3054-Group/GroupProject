@@ -226,7 +226,7 @@ public class Register extends AppCompatActivity {
                     Log.d("Email",emailaddress);
                     final String securityquestionanswer = squestion.getText().toString();
                     Log.d("s question",securityquestionanswer);
-                    String Password = password.getText().toString();
+                    final String Password = password.getText().toString();
                     Log.d("Password is ",Password);
 
                     if(fname.equals("")||sname.equals("")|| emailaddress.equals("")|| securityquestionanswer.equals("") || Password.equals("") )
@@ -238,7 +238,40 @@ public class Register extends AppCompatActivity {
                     else
                     {
                         //run insert query
-                        Toast.makeText(getApplication(), "No Fields Are Empty Run Query", Toast.LENGTH_LONG).show();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Socket socket = null;
+
+                                try {
+                                    socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                                    //Output data to Server
+                                    OutputStream out = socket.getOutputStream();
+                                    PrintWriter pw = new PrintWriter(out);
+                                    //Input sql sentence which you want to execute
+                                    String sqlString = "insert into tbl_users(Forename,Surname,Email,UserPassword,SecurityQuestion)" +
+                                            "values('"+fname+"','"+sname+"','"+emailaddress+"','"+Password+"','"+securityquestionanswer+"')";
+                                    pw.write(sqlString);
+                                    pw.flush();
+                                    socket.shutdownOutput();
+                                    Log.d("Test", "transport successfully");
+
+                                } catch (Exception e) {
+
+                                } finally {
+                                    try {
+                                        if(socket!=null){
+                                            socket.close();
+                                        }
+//                                socket.shutdownInput();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            }
+                        }).start();
+                        //Toast.makeText(getApplication(), "No Fields Are Empty Run Query", Toast.LENGTH_LONG).show();
 
                     }
                 }
