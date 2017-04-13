@@ -12,4 +12,14 @@ public class UrlConfig {
             "radius=5&key=AIzaSyBR5WrVEb-aq92VRqlDWE28QHMCTO3r6Y0";
     public static final String URL_PHOTO_DETAILS="https://maps.googleapis.com/maps/api/place/photo?" +
             "maxwidth=400&key=AIzaSyBR5WrVEb-aq92VRqlDWE28QHMCTO3r6Y0";
+    public static String userid=null;
+    public static String forename = null;
+    public static String surname = null;
+    public static String email = null;
+    public static String password = null;
+    public static String securityquestion = null;
+    public static String securityanswer = null;
+
+
+
 }
