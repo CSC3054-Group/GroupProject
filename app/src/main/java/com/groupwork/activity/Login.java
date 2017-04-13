@@ -136,19 +136,21 @@ public class Login extends AppCompatActivity {
                                 for (int i = 0; i < array.length(); i++) {
                                     JSONObject object = array.getJSONObject(i);
 
-                                    dbUserId = object.getString("UserId");
-                                    dbForename = object.getString("Forename");
-                                    dbSurname = object.getString("Surname");
-                                    dbEmail = object.getString("Email");
-                                    dbUserPassword = object.getString("UserPassword");
-                                    dbSQ = object.getString("SecurityQuestion");
-                                    dbSA = object.getString("SecurityAnswer");
+                                    UrlConfig.userid = object.getString("UserId");
+                                    UrlConfig.surname = object.getString("Forename");
+                                    UrlConfig.surname = object.getString("Surname");
+                                    UrlConfig.email = object.getString("Email");
+                                    UrlConfig.password = object.getString("UserPassword");
+                                    UrlConfig.securityquestion = object.getString("SecurityQuestion");
+                                    UrlConfig.securityanswer = object.getString("SecurityAnswer");
+
+                                    dbUserId = UrlConfig.userid.toString();
 
                                     String Email = object.getString("Email");
                                     Password = object.getString("UserPassword");
 
                                     Log.d("Show credentials", Email + " " + Password);
-                                    Log.d("credentials", dbUserId + dbForename + dbSurname + dbEmail + dbUserPassword + dbSA + dbSA);
+                                    Log.d("value from url config", dbUserId);
                                     //Log.d("Test2",Email+);
                                 }
                                 Log.d("Test2", "successful");
