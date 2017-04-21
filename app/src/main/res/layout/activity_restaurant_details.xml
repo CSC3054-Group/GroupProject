@@ -62,113 +62,13 @@
         android:layout_alignStart="@+id/ratingPrice" />
 
     <TextView
-        android:text="Monday"
+        android:id="@+id/txttimes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView6"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="Tuesday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingPrice"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView7"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="Wednesday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView8"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="Thursday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView9"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="Friday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView9"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView10"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtmondaytime"
-        android:layout_toEndOf="@+id/textView7"
-        android:id="@+id/txttuesdaytime"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txttuesdaytime"
-        android:layout_toEndOf="@+id/textView8"
-        android:id="@+id/txtwednesdaytime"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtwednesdaytime"
-        android:layout_toEndOf="@+id/textView9"
-        android:id="@+id/txtthursdaytime"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtthursdaytime"
-        android:layout_toEndOf="@+id/textView10"
-        android:id="@+id/txtfridaytime"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="Sunday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView16"
-        android:layout_alignStart="@+id/textView16"
-        android:id="@+id/textView17"
-        android:textColor="@android:color/background_light"/>
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView16"
-        android:layout_toEndOf="@+id/textView17"
-        android:id="@+id/txtsuntime"
+        android:text="Monday"
         android:textColor="@android:color/background_light" />
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtmondaytime"
-        android:textColor="@android:color/background_light"
-        android:layout_alignBaseline="@+id/textView6"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_toEndOf="@+id/textView6" />
 
     <View
         android:layout_width="fill_parent"
@@ -189,44 +89,27 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="102dp" />
 
-    <TextView
-        android:text="Saturday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView16"
-        android:textColor="@android:color/background_light"
-        android:layout_below="@+id/textView10"
-        android:layout_toStartOf="@+id/txtthursdaytime" />
-
-    <TextView
-        android:text="9:00 - 17:00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtsattime"
-        android:textColor="@android:color/background_light"
-        android:layout_above="@+id/txtsuntime"
-        android:layout_toEndOf="@+id/textView16" />
-
     <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/ratingPrice"
         style="@android:style/Widget.Holo.RatingBar.Small"
-        android:numStars="3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView5"
-        android:layout_alignParentEnd="true" />
+        android:numStars="3"
+        android:rating="2" />
 
     <RadioGroup
-        android:id="@+id/radio_group"
+        android:id="@+id/radio_group_sr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:checkedButton="@+id/rButton_popular"
         android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/radio_group"
         android:layout_alignParentStart="true">
 
         <RadioButton
-            android:id="@+id/rButton_popular"
+            android:id="@+id/rButton_call"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -238,8 +121,10 @@
             android:textColor="#929292"
             />
 
+
+
         <RadioButton
-            android:id="@+id/rButton_category"
+            android:id="@+id/rButton_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -249,18 +134,9 @@
             android:text="@string/text_review"
             android:textColor="@color/slt_btn_color" />
 
-        <RadioButton
-            android:id="@+id/rButton_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:button="@null"
-            android:drawableTop="@drawable/slt_bg_location"
-            android:gravity="center"
-            android:text="@string/text_map"
-            android:textColor="@color/slt_btn_color" />
 
         <RadioButton
-            android:id="@+id/rButton_user"
+            android:id="@+id/rButton_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -279,6 +155,51 @@
         android:numStars="5"
         android:layout_below="@+id/txtrestaurantaddress"
         android:layout_alignParentStart="true" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:checkedButton="@+id/rButton_popular"
+        android:orientation="horizontal">
+
+
+
+        <RadioButton
+            android:id="@+id/rButton_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/slt_bg_category"
+            android:gravity="center"
+            android:text="Saved Places"
+            android:textColor="@color/slt_btn_color" />
+
+        <RadioButton
+            android:id="@+id/rButton_Nearby"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/slt_bg_location"
+            android:gravity="center"
+            android:text="@string/text_location"
+            android:textColor="@color/slt_btn_color" />
+
+        <RadioButton
+            android:id="@+id/rButton_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/slt_bg_user"
+            android:gravity="center"
+            android:text="@string/text_user"
+            android:textColor="@color/slt_btn_color" />
+    </RadioGroup>
+
 
 
 </RelativeLayout>

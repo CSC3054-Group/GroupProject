@@ -19,6 +19,8 @@ public class UrlConfig {
     public static String password = null;
     public static String securityquestion = null;
     public static String securityanswer = null;
+    public static String restaurantnumber = null;
+    public static String restid = null;
 
 
 
