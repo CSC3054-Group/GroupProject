@@ -87,7 +87,8 @@
         android:background="@android:color/background_light"
         android:layout_above="@+id/radio_group"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="102dp" />
+        android:layout_marginBottom="102dp"
+        android:id="@+id/view2" />
 
     <RatingBar
         android:id="@+id/ratingPrice"
@@ -200,6 +201,26 @@
             android:textColor="@color/slt_btn_color" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/lbldescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txttimes"
+        android:layout_marginTop="72dp"
+        android:text="Something about this place:"
+        android:textColor="@color/White" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/view2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lbldescription"
+        android:text="text description"
+        android:textColor="@color/White" />
 
 
 </RelativeLayout>

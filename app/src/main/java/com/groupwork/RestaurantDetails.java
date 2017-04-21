@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -41,6 +42,7 @@ import java.net.Socket;
 public class RestaurantDetails extends AppCompatActivity {
     TextView restname;
     TextView restAddress;
+    TextView restdesc;
     RatingBar rOverall;
     TextView opTimes;
     TextView hyg;
@@ -61,6 +63,14 @@ public class RestaurantDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Get id from previous activity
+        Intent intent  = getIntent();
+        int redId = intent.getIntExtra("resId",0);
+        UrlConfig.restid = String.valueOf(redId);
+        Log.d("ResID",String.valueOf(redId));
+
+
         setContentView(R.layout.activity_restaurant_details);
         InitialBotTab();
         InitialSwitch();
@@ -77,10 +87,8 @@ public class RestaurantDetails extends AppCompatActivity {
         opTimes = (TextView) findViewById(R.id.txttimes);
         //number = (TextView) findViewById(R.id.textView16);
         price = (RatingBar) findViewById(R.id.ratingPrice);
-        //Get id from previous activity
-        Intent intent  = getIntent();
-        int redId = intent.getIntExtra("resId",0);
-        Log.d("ResID",String.valueOf(redId));
+        restdesc = (TextView) findViewById(R.id.txtDescription);
+
 
         //use this id in query to select restaurant details from db and display them
         new Thread(new Runnable() {
@@ -95,14 +103,18 @@ public class RestaurantDetails extends AppCompatActivity {
                     OutputStream out = socket.getOutputStream();
                     PrintWriter pw = new PrintWriter(out);
                     //Input sql sentence which you want to execute
-                    String sqlString = "";
+                    String sqlString = "Select tbl_restaurants.restId as id, resLocation, resNumber, resName, resDText, resDTimes, AVG(tbl_reviews.revStarRating) as avgcnt " +
+                            "FROM tbl_restaurants " +
+                            "INNER JOIN tbl_restdetails on tbl_restaurants.restId = tbl_restdetails.restId " +
+                            "LEFT JOIN tbl_reviews on tbl_restaurants.restId = tbl_reviews.restId " +
+                            "WHERE tbl_restaurants.restId = '"+UrlConfig.restid+"'";
                     pw.write(sqlString);
                     pw.flush();
                     socket.shutdownOutput();
                     Log.d("Test", "transport successfully");
+
+
                     //get response from server
-
-
                     InputStream is = socket.getInputStream();
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader br = new BufferedReader(isr);
@@ -123,12 +135,12 @@ public class RestaurantDetails extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
 
                         //UrlConfig.userid = object.getString("UserId");
-                        UrlConfig.restaurantnumber = object.getString("");
-                        UrlConfig.restid = object.getString("");
-                        restname.setText(object.getString(""));
-                        restAddress.setText(object.getString(""));
-                        opTimes.setText(object.getString(""));
-                        int rating = Integer.parseInt(object.getString(""));
+                        UrlConfig.restaurantnumber = object.getString("resNumber");
+                        restname.setText(object.getString("resName"));
+                        restAddress.setText(object.getString("resLocation"));
+                        opTimes.setText(object.getString("resDTimes"));
+                        restdesc.setText(object.getString("resDText"));
+                        int rating = Integer.parseInt(object.getString("avgcnt"));
                         rOverall.setNumStars(rating);
 
 
@@ -202,16 +214,12 @@ public class RestaurantDetails extends AppCompatActivity {
                                     OutputStream out = socket.getOutputStream();
                                     PrintWriter pw = new PrintWriter(out);
                                     //Input sql sentence which you want to execute
-                                    String sqlString = "";
+                                    String sqlString = "INSERT INTO tbl_usersaved (restid, UserId) VALUES ('"+  UrlConfig.restid +"','"+ UrlConfig.userid +"')";
                                     pw.write(sqlString);
                                     pw.flush();
                                     socket.shutdownOutput();
                                     Log.d("Test", "transport successfully");
-
-                                    Message message = Message.obtain();
-                                    message.obj = "RegisterSuccess";
-                                    message.what = 1;  // obj and what is similar as value-key
-
+                                    Toast.makeText(getApplication(), "Saved!", Toast.LENGTH_SHORT).show();
 
 
                                 } catch (Exception e) {
