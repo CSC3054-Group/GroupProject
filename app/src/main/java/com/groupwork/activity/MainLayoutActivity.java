@@ -60,12 +60,7 @@ public class MainLayoutActivity extends AppCompatActivity {
                         transaction4.replace(R.id.container,new NeabyFragment());
                         transaction4.commit();
                         break;
-                    case R.id.rButton_popular:
-                        FragmentManager manager1 = getSupportFragmentManager();
-                        FragmentTransaction transaction1 =manager1.beginTransaction();
-                        transaction1.replace(R.id.container,new FragmentOne());
-                        transaction1.commit();
-                        break;
+
                     case R.id.rButton_category:
                         FragmentManager manager2 = getSupportFragmentManager();
                         FragmentTransaction transaction2 =manager2.beginTransaction();

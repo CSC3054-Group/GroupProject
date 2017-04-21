@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.groupwork.R;
+import com.groupwork.UserHome;
 import com.groupwork.urlContrans.UrlConfig;
 
 import org.json.JSONArray;
@@ -52,6 +53,8 @@ public class Login extends AppCompatActivity {
                 //LoginSuccess.putExtra("dbsa",dbSA);
                 //startActivity(LoginSuccess);
                 Toast.makeText(getApplication(), "Login Success. Go To The HomePage Of App", Toast.LENGTH_LONG).show();
+                Intent login = new Intent(Login.this, MainLayoutActivity.class);
+                startActivity(login);
 
             }
             else if (text.equals("Fail"))
