@@ -102,6 +102,7 @@ public class RestaurantDetails extends AppCompatActivity {
                     Log.d("Test", "transport successfully");
                     //get response from server
 
+
                     InputStream is = socket.getInputStream();
                     InputStreamReader isr = new InputStreamReader(is);
                     BufferedReader br = new BufferedReader(isr);
