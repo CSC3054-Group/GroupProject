@@ -56,13 +56,13 @@
         android:layout_alignStart="@+id/et_uname_login"
         android:layout_below="@+id/et_uname_login"
         android:layout_marginTop="45dp"
-        android:backgroundTint="@color/color_white"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textAlignment="textStart"
         android:textColor="#FFFFFF"
         android:textColorHint="@color/color_white"
+        android:backgroundTint="@color/color_white"
         android:textStyle="bold" />
 
     <ImageView
