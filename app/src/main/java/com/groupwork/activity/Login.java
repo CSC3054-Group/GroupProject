@@ -142,7 +142,7 @@ public class Login extends AppCompatActivity {
                                     JSONObject object = array.getJSONObject(i);
 
                                     UrlConfig.userid = object.getString("UserId");
-                                    UrlConfig.surname = object.getString("Forename");
+                                    UrlConfig.forename = object.getString("Forename");
                                     UrlConfig.surname = object.getString("Surname");
                                     UrlConfig.email = object.getString("Email");
                                     UrlConfig.password = object.getString("UserPassword");

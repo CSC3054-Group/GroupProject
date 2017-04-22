@@ -22,9 +22,9 @@ public class UserActivity extends Activity implements ItemSelectedListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.user_layout);
+        setContentView(R.layout.user_layout_new);
 
-
+        /*
         CircleImageView circleImageView = (CircleImageView) findViewById(R.id.user_profile_circleview);
         if (circleImageView != null) {
             circleImageView.setOnItemSelectedClickListener(this);
@@ -38,6 +38,7 @@ public class UserActivity extends Activity implements ItemSelectedListener {
                 startActivity(intent);
             }
         });
+        */
     }
 
     @Override
