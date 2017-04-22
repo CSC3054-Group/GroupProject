@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.groupwork.R;
 import com.groupwork.activity.ForgotPassword;
@@ -25,6 +27,7 @@ public class FragmentThree extends Fragment {
     private TextView user_profile_email;
     private TextView user_profile_password;
     private TextView user_profile_changepwd;
+    private ImageView user_profile_img;
 
     @Nullable
     @Override
@@ -35,6 +38,7 @@ public class FragmentThree extends Fragment {
         user_profile_email = (TextView)view.findViewById(R.id.user_profile_email);
         user_profile_password = (TextView)view.findViewById(R.id.user_profile_password);
         user_profile_changepwd = (TextView)view.findViewById(R.id.user_profile_changepwd);
+        user_profile_img = (ImageView)view.findViewById(R.id.user_profile_img);
 
         Log.d("forename", ""+UrlConfig.forename);
 
@@ -51,6 +55,17 @@ public class FragmentThree extends Fragment {
             }
         });
 
+        user_profile_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("android.intent.action.PICK");
+                intent.setType("image/*");
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+
+
 }
