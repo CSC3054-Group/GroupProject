@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -19,8 +20,20 @@ import android.widget.Toast;
 import com.groupwork.R;
 import com.groupwork.adapter.SearchAdapter;
 import com.groupwork.bean.Bean;
+import com.groupwork.bean.SearchItem;
 import com.groupwork.customView.SearchView;
+import com.groupwork.urlContrans.UrlConfig;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +64,8 @@ public class SearchActivity extends Activity implements SearchView.SearchViewLis
      */
     private SearchAdapter resultAdapter;
 
-    private List<Bean> dbData;
+    //private List<Bean> dbData;
+    private List<SearchItem>dbData;
 
     /**
      * 热搜版数据
@@ -66,7 +80,8 @@ public class SearchActivity extends Activity implements SearchView.SearchViewLis
     /**
      * 搜索结果的数据
      */
-    private List<Bean> resultData;
+    //private List<Bean> resultData;
+    private List<SearchItem>resultData;
 
     /**
      * 默认提示框显示项的个数
@@ -138,9 +153,74 @@ public class SearchActivity extends Activity implements SearchView.SearchViewLis
     private void getDbData() {
         int size = 100;
         dbData = new ArrayList<>(size);
+        /*
         for (int i = 0; i < size; i++) {
             dbData.add(new Bean(R.drawable.food, "restaurant name" + (i + 1), "restaurant description", i * 20 + 2 + ""));
         }
+        */
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Socket socket = null;
+                try {
+                    socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                    //Output data to Server
+                    OutputStream out = socket.getOutputStream();
+                    PrintWriter pw = new PrintWriter(out);
+                    //Input sql sentence which you want to execute
+                    //String sqlString = "select Email from tbl_users where Email = '" + UserEmail + "'";
+                    String sqlString = "select restId, resName, resLocation from tbl_restaurants";
+                    pw.write(sqlString);
+                    pw.flush();
+                    socket.shutdownOutput();
+                    Log.d("Test", "transport successfully");
+                    //get response from server
+
+                    InputStream is = socket.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String info = "";
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        info = info + line;
+
+                    }
+
+                    //socket.shutdownInput();
+
+                    Log.d("Test", info);
+
+
+                    JSONArray array = new JSONArray(info);
+
+                    String restId = "";
+                    String resName = "";
+                    String resLocation = "";
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+                        restId = object.getString("restId");
+                        resName = object.getString("resName");
+                        resLocation = object.getString("resLocation");
+                        Log.d("Test", resName);
+                        dbData.add(new SearchItem(Integer.valueOf(restId).intValue(), resName, resLocation));
+
+                    }
+
+                }catch (Exception e) {
+
+                } finally {
+                    try {
+                        if(socket!=null){
+                            socket.close();
+                        }
+//                                socket.shutdownInput();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
     /**
@@ -167,8 +247,8 @@ public class SearchActivity extends Activity implements SearchView.SearchViewLis
             autoCompleteData.clear();
             for (int i = 0, count = 0; i < dbData.size()
                     && count < hintSize; i++) {
-                if (dbData.get(i).getTitle().contains(text.trim())) {
-                    autoCompleteData.add(dbData.get(i).getTitle());
+                if (dbData.get(i).getResName().contains(text.trim())) {
+                    autoCompleteData.add(dbData.get(i).getResName());
                     count++;
                 }
             }
@@ -190,7 +270,7 @@ public class SearchActivity extends Activity implements SearchView.SearchViewLis
         } else {
             resultData.clear();
             for (int i = 0; i < dbData.size(); i++) {
-                if (dbData.get(i).getTitle().contains(text.trim())) {
+                if (dbData.get(i).getResName().contains(text.trim())) {
                     resultData.add(dbData.get(i));
                 }
             }

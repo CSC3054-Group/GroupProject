@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.groupwork.R;
+import com.groupwork.UserHome;
 import com.groupwork.urlContrans.UrlConfig;
 
 import org.json.JSONArray;
@@ -42,15 +43,19 @@ public class Login extends AppCompatActivity {
             if(text.equals("SUCCESS"))
             {
                 Log.d("Test2","enter into handle");
-                Intent LoginSuccess = new Intent(Login.this, HomeScreen.class);
-                LoginSuccess.putExtra("UserId",dbUserId);
-                LoginSuccess.putExtra("Forename",dbForename);
-                LoginSuccess.putExtra("Surname",dbSurname);
-                LoginSuccess.putExtra("Email",dbEmail);
-                LoginSuccess.putExtra("Password",dbUserPassword);
-                LoginSuccess.putExtra("dbsq",dbSQ);
-                LoginSuccess.putExtra("dbsa",dbSA);
-                startActivity(LoginSuccess);
+                //Intent LoginSuccess = new Intent(Login.this, HomeScreen.class);
+                //LoginSuccess.putExtra("UserId",dbUserId);
+                //LoginSuccess.putExtra("Forename",dbForename);
+                //LoginSuccess.putExtra("Surname",dbSurname);
+                //LoginSuccess.putExtra("Email",dbEmail);
+                //LoginSuccess.putExtra("Password",dbUserPassword);
+                //LoginSuccess.putExtra("dbsq",dbSQ);
+                //LoginSuccess.putExtra("dbsa",dbSA);
+                //startActivity(LoginSuccess);
+                Toast.makeText(getApplication(), "Login Success. Go To The HomePage Of App", Toast.LENGTH_LONG).show();
+                Intent login = new Intent(Login.this, MainLayoutActivity.class);
+                startActivity(login);
+
             }
             else if (text.equals("Fail"))
             {
@@ -137,12 +142,12 @@ public class Login extends AppCompatActivity {
                                     JSONObject object = array.getJSONObject(i);
 
                                     UrlConfig.userid = object.getString("UserId");
-                                    UrlConfig.surname = object.getString("Forename");
+                                    UrlConfig.forename = object.getString("Forename");
                                     UrlConfig.surname = object.getString("Surname");
                                     UrlConfig.email = object.getString("Email");
                                     UrlConfig.password = object.getString("UserPassword");
-                                    UrlConfig.securityquestion = object.getString("SecurityQuestion");
-                                    UrlConfig.securityanswer = object.getString("SecurityAnswer");
+                                    //UrlConfig.securityquestion = object.getString("SecurityQuestion");
+                                    //UrlConfig.securityanswer = object.getString("SecurityAnswer");
 
                                     dbUserId = UrlConfig.userid.toString();
 

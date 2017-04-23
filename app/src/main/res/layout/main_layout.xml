@@ -18,17 +18,7 @@
         android:checkedButton="@+id/rButton_popular"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/rButton_popular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="false"
-            android:drawableTop="@drawable/slt_bg_popular"
-            android:gravity="center"
-            android:text="@string/text_popular"
-            android:textColor="@color/slt_btn_color" />
+
 
         <RadioButton
             android:id="@+id/rButton_category"
@@ -38,7 +28,7 @@
             android:button="@null"
             android:drawableTop="@drawable/slt_bg_category"
             android:gravity="center"
-            android:text="@string/text_category"
+            android:text="Saved Places"
             android:textColor="@color/slt_btn_color" />
 
         <RadioButton

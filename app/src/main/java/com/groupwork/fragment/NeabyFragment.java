@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.groupwork.R;
+import com.groupwork.RestaurantDetails;
 import com.groupwork.activity.IntentTest;
 import com.groupwork.activity.MapActivity;
 import com.groupwork.adapter.NearbyListAdapter;
@@ -130,8 +131,8 @@ public class NeabyFragment extends Fragment {
 
                   NearbyItem near = (NearbyItem) listAdapter.getItem(position);
 
-                Intent intent =new Intent(getActivity(), IntentTest.class);
-                intent.putExtra("resName",near.getResName());
+                Intent intent =new Intent(getActivity(), RestaurantDetails.class);
+                intent.putExtra("resId",near.getResId());
                 startActivity(intent);
             }
         });
