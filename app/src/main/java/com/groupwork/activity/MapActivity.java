@@ -182,7 +182,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         getCuttentLocation();
         new Thread(new RestaurantsThread()).start();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(get_latititude, get_longtitute), 13));
+                new LatLng(get_latititude, get_longtitute), 13)
+        );
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             return;

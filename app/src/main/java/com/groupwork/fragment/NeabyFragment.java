@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -84,6 +85,28 @@ public class NeabyFragment extends Fragment {
             return true;
         }
     });
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            current_latitude = location.getLatitude();
+            current_altitude = location.getLongitude();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,6 +114,7 @@ public class NeabyFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.listview_nearby);
         searchView = (android.widget.SearchView) view.findViewById(R.id.searchView_nearby);
         map_text = (TextView) view.findViewById(R.id.maptext_nearby);
+
         searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -118,8 +142,8 @@ public class NeabyFragment extends Fragment {
                     new Thread(new RestaurantsThread()).start();
                 }
                 else if(newText.equals("")&&list.size()>0){
-                    listAdapter.refresh(list);
-                    listAdapter.notifyDataSetChanged();
+                  //  listAdapter.refresh(list);
+                 //   listAdapter.notifyDataSetChanged();
                 }
                 return false;
             }
@@ -161,26 +185,28 @@ public class NeabyFragment extends Fragment {
 
     }
 
-    private void getCurrentLocation(){
+        private void getCurrentLocation(){
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         boolean isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         Location location = null;
         if (!(isGPSEnable || isNetworkEnable)) {
-
+            Toast.makeText(getActivity(),"GPS and Network can't use",Toast.LENGTH_SHORT).show();
         } else {
             if (isNetworkEnable) {
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
-
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, locationListener);
                 location  =locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             }
             if(isGPSEnable){
                 if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
-
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, locationListener);
                 location  =locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             }
         }
@@ -188,6 +214,7 @@ public class NeabyFragment extends Fragment {
             current_latitude = location.getLatitude();
             current_altitude = location.getLongitude();
         }
+
     }
 
     @Override

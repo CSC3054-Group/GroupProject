@@ -15,21 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:checkedButton="@+id/rButton_popular"
+        android:checkedButton="@+id/rButton_Nearby"
         android:orientation="horizontal">
 
 
 
-        <RadioButton
-            android:id="@+id/rButton_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/slt_bg_category"
-            android:gravity="center"
-            android:text="Saved Places"
-            android:textColor="@color/slt_btn_color" />
+
 
         <RadioButton
             android:id="@+id/rButton_Nearby"
@@ -40,6 +31,17 @@
             android:drawableTop="@drawable/slt_bg_location"
             android:gravity="center"
             android:text="@string/text_location"
+            android:textColor="@color/slt_btn_color" />
+
+        <RadioButton
+            android:id="@+id/rButton_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/slt_bg_category"
+            android:gravity="center"
+            android:text="Saved Places"
             android:textColor="@color/slt_btn_color" />
 
         <RadioButton
