@@ -154,7 +154,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapItem_resName = (TextView) findViewById(R.id.maptext_resName);
         mapItem_resType = (TextView) findViewById(R.id.map_resType);
         mapItem_resDuration = (TextView) findViewById(R.id.map_duration);
-        getCuttentLocation();
+
         nearList = new ArrayList<>();
         mapItem_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +179,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
+        getCuttentLocation();
         new Thread(new RestaurantsThread()).start();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(get_latititude, get_longtitute), 13));

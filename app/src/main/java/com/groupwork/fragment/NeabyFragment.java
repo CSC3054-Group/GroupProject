@@ -67,8 +67,8 @@ public class NeabyFragment extends Fragment {
     private NearbyListAdapter listAdapter;
     private TextView map_text;
     private android.widget.SearchView searchView;
-    private double current_latitude;
-    private double current_altitude;
+    private static double current_latitude;
+    private static double current_altitude;
 
 
     Handler handler = new Handler(new Handler.Callback() {
