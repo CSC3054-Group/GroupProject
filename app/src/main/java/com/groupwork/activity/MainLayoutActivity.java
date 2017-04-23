@@ -29,6 +29,8 @@ public class MainLayoutActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class MainLayoutActivity extends AppCompatActivity {
         InitialSwitch();
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction =manager.beginTransaction();
-        transaction.add(R.id.container,new FragmentOne());
+        transaction.add(R.id.container,new NeabyFragment());
         transaction.commit();
     }
 

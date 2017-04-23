@@ -67,7 +67,11 @@ public class SocketClass extends AppCompatActivity {
                             OutputStream out = socket.getOutputStream();
                             PrintWriter pw = new PrintWriter(out);
                             //Input sql sentence which you want to execute
-                            String sqlString = "select * from tbl_users";
+                            String sqlString = "select tbl_restaurants.restId,resLocation,tbl_restaurants.resName," +
+                                    "AVG(revStarRating),resType from tbl_restaurants,tbl_restype,tbl_reviews " +
+                                    "where tbl_restaurants.restId=tbl_reviews.restId " +
+                                    "and tbl_restaurants.resTypeId=tbl_restype.resTypeId " +
+                                    "GROUP BY tbl_restaurants.restId";
                             pw.write(sqlString);
                             pw.flush();
                             socket.shutdownOutput();
