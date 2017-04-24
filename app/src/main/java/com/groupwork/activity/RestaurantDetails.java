@@ -48,8 +48,10 @@ public class RestaurantDetails extends AppCompatActivity {
     Button save;
     private RadioGroup radioGroup;
     private RadioButton[] radioButtons;
-    private RadioGroup radioGroupphonesave;
-    private RadioButton[] radioButtonsPhoneSave;
+
+    RadioButton savedplaces;
+    RadioButton nearby;
+    RadioButton User;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -61,22 +63,16 @@ public class RestaurantDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UrlConfig.restid = "1";
 
         //Get id from previous activity
-        Intent intent  = getIntent();
-        int redId = intent.getIntExtra("resId",0);
-        UrlConfig.restid = String.valueOf(redId);
-        Log.d("ResID",String.valueOf(redId));
+        //Intent intent  = getIntent();
+        //int redId = intent.getIntExtra("resId",0);
+        //UrlConfig.restid = String.valueOf(redId);
+        //Log.d("ResID",String.valueOf(redId));
 
 
         setContentView(R.layout.activity_restaurant_details);
-
-        //InitialBotTab();
-        //InitialSwitch();
-        //FragmentManager manager = getSupportFragmentManager();
-        //FragmentTransaction transaction =manager.beginTransaction();
-        //transaction.add(R.id.container,new FragmentOne());
-        //transaction.commit();
 
         //set variables so they can be assigned via query
         restname = (TextView) findViewById(R.id.txtRestaurantName);
@@ -92,7 +88,6 @@ public class RestaurantDetails extends AppCompatActivity {
         call.setOnClickListener(myOnClick_call());
         review.setOnClickListener(myOnClick_review());
         save.setOnClickListener(myOnClick_save());
-
 
         //use this id in query to select restaurant details from db and display them
         new Thread(new Runnable() {
@@ -146,7 +141,9 @@ public class RestaurantDetails extends AppCompatActivity {
                         opTimes.setText(object.getString("resDTimes"));
                         restdesc.setText(object.getString("resDText"));
                         int rating = Integer.parseInt(object.getString("avgcnt"));
-                        rOverall.setNumStars(rating);
+                        rOverall.setRating(rating);
+                        Log.d("Test", object.getString("avgcnt"));
+
 
 
                         //Log.d("Test2",Email+);
@@ -223,7 +220,7 @@ public class RestaurantDetails extends AppCompatActivity {
             public void onClick(View v) {
                 //send to review screen with id of restaurant
                 Intent intent2 = new Intent(RestaurantDetails.this, Reviewpage.class);
-                intent2.putExtra("resid", UrlConfig.restid);
+                //intent2.putExtra("resid", UrlConfig.restid);
                 startActivity(intent2);
             }
         };
@@ -244,41 +241,6 @@ public class RestaurantDetails extends AppCompatActivity {
     }
 
 
-    private void InitialBotTab(){
-        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        radioButtons = new RadioButton[radioGroup.getChildCount()];
-        for(int i=0;i<radioGroup.getChildCount();i++){
-            radioButtons[i] = (RadioButton) radioGroup.getChildAt(i);
-        }
-    }
-    private void InitialSwitch(){
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.rButton_Nearby:
-                        FragmentManager manager4 = getSupportFragmentManager();
-                        FragmentTransaction transaction4 =manager4.beginTransaction();
-                        transaction4.replace(R.id.container,new NeabyFragment());
-                        transaction4.commit();
-                        break;
 
-                    case R.id.rButton_category:
-                        FragmentManager manager2 = getSupportFragmentManager();
-                        FragmentTransaction transaction2 =manager2.beginTransaction();
-                        transaction2.replace(R.id.container,new FragmentTwo());
-                        transaction2.commit();
-                        break;
-                    case R.id.rButton_user:
-                        FragmentManager manager3 = getSupportFragmentManager();
-                        FragmentTransaction transaction3 =manager3.beginTransaction();
-                        transaction3.replace(R.id.container,new FragmentThree());
-                        transaction3.commit();
-                        break;
-                    default:break;
 
-                }
-            }
-        });
-    }
 }
