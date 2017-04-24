@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+
+    >
+
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/bg_profile"
+            android:scaleType="fitXY"
+            android:id="@+id/saved_list_photo"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="resName"
+            android:layout_alignBottom="@+id/saved_list_photo"
+            android:textSize="25sp"
+            android:layout_margin="10dp"
+            android:id="@+id/saved_list_resName"/>
+
+
+
+</RelativeLayout>
