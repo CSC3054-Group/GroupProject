@@ -2,6 +2,8 @@ package com.groupwork.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -45,12 +47,36 @@ public class RestaurantDetails extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton[] radioButtons;
     TextView rating;
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    String resname,resaddress,resdescription,resopeningtimes ,resphonenumber,resreview;
     private GoogleApiClient client;
+
+    Handler handler = new Handler(){
+
+        public void handleMessage(Message msg) {
+            String text = msg.obj.toString();
+            //textview feedback
+            Log.d("Test2",text);
+            if(text.equals("DatabaseReadSuccessful"))
+            {
+
+                UrlConfig.restaurantnumber = resphonenumber;
+                restname.setText(resname);
+                restAddress.setText(resaddress);
+                opTimes.setText(resopeningtimes);
+                restdesc.setText(resdescription);
+                rating.setText(resreview);
+            }
+            else if (text.equals("AlreadySaved"))
+            {
+                Toast.makeText(getApplication(), "Already Saved!", Toast.LENGTH_SHORT).show();
+                Log.d("Already Saved in db", "");
+            }
+            else if (text.equals("ResNotSaved"))
+            {   //not saved
+                saveres();
+            }
+        }
+    };
 
 
     @Override
@@ -128,17 +154,17 @@ public class RestaurantDetails extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
 
 
-                        UrlConfig.restaurantnumber = object.getString("resNumber");
-                        restname.setText(object.getString("resName"));
-                        restAddress.setText(object.getString("resLocation"));
-                        opTimes.setText(object.getString("resDTimes"));
-                        restdesc.setText(object.getString("resDText"));
-                        rating.setText(object.getString("avgcnt"));
+                        resphonenumber = object.getString("resNumber");
+                        resname = (object.getString("resName"));
+                        resaddress = (object.getString("resLocation"));
+                        resopeningtimes = (object.getString("resDTimes"));
+                        resdescription = (object.getString("resDText"));
+                        resreview = (object.getString("avgcnt"));
                         Log.d("Test", object.getString("avgcnt"));
-
-
-
-                        //Log.d("Test2",Email+);
+                        Message message = Message.obtain();
+                        message.obj = "DatabaseReadSuccessful";
+                        message.what = 1;  // obj and what is similar as value-key
+                        handler.sendMessage(message);// send message to handler
                     }
                     Log.d("Test2", "successful");
 
@@ -220,12 +246,21 @@ public class RestaurantDetails extends AppCompatActivity {
 
                         if(x > 0){
                             //already saved
-                            Toast.makeText(getApplication(), "Already Saved!", Toast.LENGTH_SHORT).show();
+
+                            Message message = Message.obtain();
+                            message.obj = "AlreadySaved";
+                            Log.d("AlreadySaved","AlreadySaved");
+                            message.what = 1;  // obj and what is similar as value-key
+                            handler.sendMessage(message);// send message to handler
 
                         }
                         else{
-                            //not saved
-                            saveres();
+
+                            Message message = Message.obtain();
+                            message.obj = "ResNotSaved";
+                            Log.d("ResNotSaved","ResNotSaved");
+                            message.what = 1;  // obj and what is similar as value-key
+                            handler.sendMessage(message);// send message to handler
                         }
 
 
@@ -267,7 +302,7 @@ public class RestaurantDetails extends AppCompatActivity {
                     pw.write(sqlString);
                     pw.flush();
                     socket.shutdownOutput();
-                    Log.d("Test", "transport successfully");
+                    Log.d("Test", "inserted successfully");
                     Toast.makeText(getApplication(), "Saved!", Toast.LENGTH_SHORT).show();
 
 
