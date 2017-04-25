@@ -42,13 +42,13 @@ public class RestaurantDetails extends AppCompatActivity {
     TextView opTimes;
     TextView hyg;
     TextView number;
-    RatingBar price;
+
     Button review;
     Button call;
     Button save;
     private RadioGroup radioGroup;
     private RadioButton[] radioButtons;
-
+    TextView rating;
     RadioButton savedplaces;
     RadioButton nearby;
     RadioButton User;
@@ -77,10 +77,10 @@ public class RestaurantDetails extends AppCompatActivity {
         //set variables so they can be assigned via query
         restname = (TextView) findViewById(R.id.txtRestaurantName);
         restAddress = (TextView) findViewById(R.id.txtrestaurantaddress);
-        rOverall = (RatingBar) findViewById(R.id.ratingOverall);
+        //rOverall = (RatingBar) findViewById(R.id.ratingOverall);
         opTimes = (TextView) findViewById(R.id.txttimes);
         //number = (TextView) findViewById(R.id.textView16);
-        price = (RatingBar) findViewById(R.id.ratingPrice);
+        rating = (TextView) findViewById(R.id.txtvrating);
         restdesc = (TextView) findViewById(R.id.txtDescription);
         save = (Button)findViewById(R.id.btnsave);
         call= (Button)findViewById(R.id.btncall);
@@ -140,8 +140,8 @@ public class RestaurantDetails extends AppCompatActivity {
                         restAddress.setText(object.getString("resLocation"));
                         opTimes.setText(object.getString("resDTimes"));
                         restdesc.setText(object.getString("resDText"));
-                        int rating = Integer.parseInt(object.getString("avgcnt"));
-                        rOverall.setRating(rating);
+                        //int rating = Integer.parseInt(object.getString("avgcnt"));
+                         rating.setText(object.getString("avgcnt"));
                         Log.d("Test", object.getString("avgcnt"));
 
 
