@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.groupwork.R;
-import com.groupwork.RestaurantDetails;
+import com.groupwork.activity.RestaurantDetails;
 import com.groupwork.adapter.NearbyListAdapter;
 import com.groupwork.adapter.SavedListAdapter;
 import com.groupwork.bean.NearbyItem;

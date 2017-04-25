@@ -38,20 +38,13 @@ public class RestaurantDetails extends AppCompatActivity {
     TextView restname;
     TextView restAddress;
     TextView restdesc;
-    RatingBar rOverall;
     TextView opTimes;
-    TextView hyg;
-    TextView number;
-
     Button review;
     Button call;
     Button save;
     private RadioGroup radioGroup;
     private RadioButton[] radioButtons;
     TextView rating;
-    RadioButton savedplaces;
-    RadioButton nearby;
-    RadioButton User;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -63,13 +56,13 @@ public class RestaurantDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UrlConfig.restid = "1";
+        //UrlConfig.restid = "1";
 
         //Get id from previous activity
-        //Intent intent  = getIntent();
-        //int redId = intent.getIntExtra("resId",0);
-        //UrlConfig.restid = String.valueOf(redId);
-        //Log.d("ResID",String.valueOf(redId));
+        Intent intent  = getIntent();
+        int redId = intent.getIntExtra("resId",0);
+        UrlConfig.restid = String.valueOf(redId);
+        Log.d("ResID",String.valueOf(redId));
 
 
         setContentView(R.layout.activity_restaurant_details);
@@ -134,14 +127,13 @@ public class RestaurantDetails extends AppCompatActivity {
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
 
-                        //UrlConfig.userid = object.getString("UserId");
+
                         UrlConfig.restaurantnumber = object.getString("resNumber");
                         restname.setText(object.getString("resName"));
                         restAddress.setText(object.getString("resLocation"));
                         opTimes.setText(object.getString("resDTimes"));
                         restdesc.setText(object.getString("resDText"));
-                        //int rating = Integer.parseInt(object.getString("avgcnt"));
-                         rating.setText(object.getString("avgcnt"));
+                        rating.setText(object.getString("avgcnt"));
                         Log.d("Test", object.getString("avgcnt"));
 
 

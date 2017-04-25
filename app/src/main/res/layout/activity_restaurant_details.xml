@@ -65,17 +65,12 @@
         android:layout_marginBottom="102dp"
         android:id="@+id/view2" />
 
-    <RadioGroup
-        android:id="@+id/radio_group_sr"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checkedButton="@+id/rButton_popular"
-        android:orientation="horizontal"
-        android:layout_above="@+id/radio_group"
-        android:layout_alignParentStart="true">
-
-
-    </RadioGroup>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"></FrameLayout>
 
     <RadioGroup
         android:id="@+id/radio_group"
