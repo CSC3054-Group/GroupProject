@@ -175,43 +175,126 @@ public class RestaurantDetails extends AppCompatActivity {
                 //save current restaurant as a saved place
                 //show toast to tell the user that the place has been saved
                 //run insert query
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Socket socket = null;
+                isSaved();
 
-                        try {
-                            socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
-                            //Output data to Server
-                            OutputStream out = socket.getOutputStream();
-                            PrintWriter pw = new PrintWriter(out);
-                            //Input sql sentence which you want to execute
-                            String sqlString = "INSERT INTO tbl_usersaved (restid, UserId) VALUES ('"+  UrlConfig.restid +"','"+ UrlConfig.userid +"')";
-                            pw.write(sqlString);
-                            pw.flush();
-                            socket.shutdownOutput();
-                            Log.d("Test", "transport successfully");
-                            Toast.makeText(getApplication(), "Saved!", Toast.LENGTH_SHORT).show();
-
-
-                        } catch (Exception e) {
-
-                        } finally {
-                            try {
-                                if(socket!=null){
-                                    socket.close();
-                                }
-//                                socket.shutdownInput();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-                }).start();
             }
         };
     return v;
+    }
+
+    public void isSaved(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("Test", "entered thread");
+                // open thread to process network access request and response
+                Socket socket = null;
+
+                try {
+                    socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                    //Output data to Server
+                    OutputStream out = socket.getOutputStream();
+                    PrintWriter pw = new PrintWriter(out);
+                    //Input sql sentence which you want to execute
+                    String sqlString = "SELECT COUNT(restid) as cnt  FROM tbl_usersaved WHERE restid = '"+  UrlConfig.restid +"' " +
+                            "AND UserId= '"+ UrlConfig.userid +"')";
+                    pw.write(sqlString);
+                    pw.flush();
+                    socket.shutdownOutput();
+                    Log.d("Test", "transport successfully");
+
+
+                    //get response from server
+                    InputStream is = socket.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String info = "";
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        info = info + line;
+
+                    }
+
+                    //socket.shutdownInput();
+
+                    Log.d("Test", info);
+
+                    JSONArray array = new JSONArray(info);
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+
+                        int x = Integer.parseInt(object.getString("cnt"));
+
+                        if(x > 0){
+                            //already saved
+                            Toast.makeText(getApplication(), "Already Saved!", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{
+                            //not saved
+                            saveres();
+                        }
+
+
+
+
+                        //Log.d("Test2",Email+);
+                    }
+                    Log.d("Test2", "successful");
+
+                } catch (Exception e) {
+
+                } finally {
+                    try {
+                        if (socket != null) {
+                            socket.close();
+                        }
+//                                socket.shutdownInput();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public void saveres(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Socket socket = null;
+
+                try {
+                    socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                    //Output data to Server
+                    OutputStream out = socket.getOutputStream();
+                    PrintWriter pw = new PrintWriter(out);
+                    //Input sql sentence which you want to execute
+                    String sqlString = "INSERT INTO tbl_usersaved (restid, UserId) VALUES ('"+  UrlConfig.restid +"','"+ UrlConfig.userid +"')";
+                    pw.write(sqlString);
+                    pw.flush();
+                    socket.shutdownOutput();
+                    Log.d("Test", "transport successfully");
+                    Toast.makeText(getApplication(), "Saved!", Toast.LENGTH_SHORT).show();
+
+
+                } catch (Exception e) {
+
+                } finally {
+                    try {
+                        if(socket!=null){
+                            socket.close();
+                        }
+//                                socket.shutdownInput();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }).start();
+
     }
     protected View.OnClickListener myOnClick_review() {
         View.OnClickListener v = new View.OnClickListener() {
