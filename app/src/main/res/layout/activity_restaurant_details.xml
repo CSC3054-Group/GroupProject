@@ -12,6 +12,17 @@
     android:background="@drawable/rest"
     tools:context="com.groupwork.activity.RestaurantDetails">
 
+    <Button
+        android:id="@+id/Title_back"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/btncall"
+        android:layout_alignStart="@+id/txtRestaurantName"
+
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back_bt" />
+
+
     <TextView
         android:id="@+id/txtRestaurantName"
         android:layout_width="wrap_content"
@@ -20,14 +31,15 @@
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_marginTop="63dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/lbldescription" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="87dp"
         android:text="Opening Times:"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
@@ -52,23 +64,24 @@
         android:id="@+id/lbldescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
         android:text="Something about this place:"
         android:textColor="@color/White"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/txttimes"
+        android:layout_alignStart="@+id/txtDescription"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbldescription"
         android:text="text description"
         android:textColor="@color/White"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/lbldescription"
+        android:layout_alignEnd="@+id/textView4" />
 
     <Button
         android:id="@+id/btncall"
@@ -76,37 +89,37 @@
         android:layout_height="wrap_content"
         android:width="2dp"
         android:background="@mipmap/ic_phone"
-        android:layout_below="@+id/txtRestaurantName"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/btnsave" />
 
     <Button
         android:id="@+id/btnreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Review"
-        android:layout_below="@+id/txtRestaurantName"
-        android:layout_toEndOf="@+id/btnsave" />
+        android:layout_above="@+id/btnviewReviews"
+        android:layout_alignStart="@+id/btnviewReviews"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btnsave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/icon_favorite_batch_grey"
-        android:layout_alignBottom="@+id/btnreview"
-        android:layout_toEndOf="@+id/btncall"
-        android:layout_below="@+id/txtRestaurantName" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btncall"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="26dp"
         android:text="Rating (stars):"
         android:textColor="@color/White"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/txtRestaurantName"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/txtvrating"
@@ -118,6 +131,15 @@
         android:textColor="@color/White"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnviewReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Reviews"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/txtDescription" />
 
 
 </RelativeLayout>

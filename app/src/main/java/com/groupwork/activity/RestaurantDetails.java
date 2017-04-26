@@ -44,6 +44,8 @@ public class RestaurantDetails extends AppCompatActivity {
     Button review;
     Button call;
     Button save;
+    Button back;
+    Button viewReview;
     private RadioGroup radioGroup;
     private RadioButton[] radioButtons;
     TextView rating;
@@ -116,6 +118,8 @@ public class RestaurantDetails extends AppCompatActivity {
         review = (Button) findViewById(R.id.btnreview);
         call.setOnClickListener(myOnClick_call());
         review.setOnClickListener(myOnClick_review());
+        viewReview = (Button) findViewById(R.id.btnviewReviews);
+        back = (Button)findViewById(R.id.Title_back);
 
 
         //use this id in query to select restaurant details from db and display them
@@ -193,6 +197,20 @@ public class RestaurantDetails extends AppCompatActivity {
             }
         }).start();
 
+        viewReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(RestaurantDetails.this, viewReviews.class);
+                //intent2.putExtra("resid", UrlConfig.restid);
+                startActivity(intent2);
+            }});
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(RestaurantDetails.this, MainLayoutActivity.class);
+                //intent2.putExtra("resid", UrlConfig.restid);
+                startActivity(intent2);
+            }});
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
