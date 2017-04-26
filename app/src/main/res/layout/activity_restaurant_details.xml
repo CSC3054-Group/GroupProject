@@ -5,24 +5,22 @@
     android:id="@+id/activity_restaurant_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     android:background="@drawable/rest"
     tools:context="com.groupwork.activity.RestaurantDetails">
 
-    <Button
-        android:id="@+id/Title_back"
-        android:layout_width="30dp"
+    <include layout="@layout/resinfo_title"
+        android:id="@+id/reinfotitle"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/btncall"
-        android:layout_alignStart="@+id/txtRestaurantName"
-
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/back_bt" />
-
-
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_below="@+id/reinfotitle"
+        >
     <TextView
         android:id="@+id/txtRestaurantName"
         android:layout_width="wrap_content"
@@ -140,6 +138,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/txtDescription" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -62,6 +62,7 @@ import java.util.List;
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
     public static final int LOCATION_UPDATE_MIN_DISTANCE = 10;
     public static final int LOCATION_UPDATE_MIN_TIME = 5000;
+    private int Restaurant_Id;
     private String RestaurantId;
     private int[] PhotoId={R.drawable.costa,R.drawable.boojum,R.drawable.bootleggers,R.drawable.empire
             ,R.drawable.ashers,R.drawable.nero,R.drawable.villa,R.drawable.madisons,R.drawable.starbucks,R.drawable.kaffe,
@@ -160,8 +161,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             @Override
             public void onClick(View v) {
                 if(v.getVisibility()==View.VISIBLE){
-                    Intent intent= new Intent(MapActivity.this,IntentTest.class);
-                    intent.putExtra("resName",mapItem_resName.getText());
+                    Intent intent= new Intent(MapActivity.this,RestaurantDetails.class);
+                    intent.putExtra("resId",Restaurant_Id);
                     startActivity(intent);
                 }
             }
@@ -225,7 +226,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         mapItem_layout.setVisibility(View.VISIBLE);
                         int resId = nearList.get(i).getResId();
                         RestaurantId = String.valueOf(resId);
-
+                        Restaurant_Id = resId;
                         mapItem_resName.setText(nearList.get(i).getResName());
                         mapItem_rating.setRating(nearList.get(i).getRating());
                         mapItem_resType.setText("Restaurant Type: "+nearList.get(i).getResType());

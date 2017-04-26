@@ -1,14 +1,22 @@
 package com.groupwork.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.groupwork.R;
+import com.groupwork.adapter.viewReviewAdapter;
+import com.groupwork.bean.ViewReview;
 import com.groupwork.urlContrans.UrlConfig;
+import com.groupwork.utils.ParserJson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,9 +28,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class viewReviews extends AppCompatActivity {
 
+    private List<ViewReview> reviewList;
+    private ListView listView;
+    private viewReviewAdapter adapter;
     Handler handler = new Handler(){
 
         public void handleMessage(Message msg) {
@@ -31,7 +44,8 @@ public class viewReviews extends AppCompatActivity {
             Log.d("Test2",text);
             if(text.equals("DatabaseReadSuccessful"))
             {
-
+                adapter.refresh(reviewList);
+                adapter.notifyDataSetChanged();
 
             }
 
@@ -43,10 +57,23 @@ public class viewReviews extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_view_reviews);
+        Button return_bt = (Button) findViewById(R.id.reviewTitle_back);
 
+        reviewList = new ArrayList<>();
+        adapter = new viewReviewAdapter(reviewList,getApplication());
+        listView = (ListView) findViewById(R.id.list_savedRes);
+        listView.setAdapter(adapter);
         String resId = UrlConfig.restid;
-
+        return_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(viewReviews.this,RestaurantDetails.class);
+                intent.putExtra("resId",UrlConfig.restid);
+                startActivity(intent);
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -83,23 +110,13 @@ public class viewReviews extends AppCompatActivity {
 
                     //socket.shutdownInput();
 
-                    Log.d("Test", info);
-
-                    JSONArray array = new JSONArray(info);
-
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-
-
-                        Log.d("Test", object.getString("avgcnt"));
-                        Message message = Message.obtain();
-                        message.obj = "DatabaseReadSuccessful";
-                        message.what = 1;  // obj and what is similar as value-key
-                        handler.sendMessage(message);// send message to handler
-
+                    if(!info.isEmpty()&&!info.equals("")){
+                        reviewList = ParserJson.paserJsonReview(info);
                     }
-                    Log.d("Test2", "successful");
-
+                    Message msg =new Message();
+                    msg.obj="DatabaseReadSuccessful";
+                    msg.what=1;
+                    handler.sendMessage(msg);
                 } catch (Exception e) {
 
                 } finally {

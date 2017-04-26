@@ -7,6 +7,7 @@ import com.groupwork.bean.ResDetails;
 import com.groupwork.bean.ResType;
 import com.groupwork.bean.Restaurants;
 import com.groupwork.bean.Reviews;
+import com.groupwork.bean.ViewReview;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +72,25 @@ public class ParserJson {
             e.printStackTrace();
         }
         return reference;
+    }
+
+    public static  List<ViewReview> paserJsonReview(String jsonString){
+        List<ViewReview> list = new ArrayList<>();
+        try{
+            JSONArray array =new JSONArray(jsonString);
+            for(int i=0;i<array.length();i++){
+                JSONObject object = array.getJSONObject(i);
+                float rating = (float) object.getDouble("revStarRating");
+                String revText = object.getString("revText");
+                String  Forename =  object.getString("Forename");
+                String Surname = object.getString("Surname");
+                ViewReview viewReview  = new ViewReview(revText,rating,Forename,Surname);
+                list.add(viewReview);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

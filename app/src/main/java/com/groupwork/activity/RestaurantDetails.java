@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -62,6 +63,7 @@ public class RestaurantDetails extends AppCompatActivity {
             if(text.equals("DatabaseReadSuccessful"))
             {
 
+
                 UrlConfig.restaurantnumber = resphonenumber;
                 restname.setText(resname);
                 //restAddress.setText(resaddress);
@@ -95,15 +97,13 @@ public class RestaurantDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //UrlConfig.restid = "1";
-
         //Get id from previous activity
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_restaurant_details);
         Intent intent = getIntent();
         int redId = intent.getIntExtra("resId", 0);
         UrlConfig.restid = String.valueOf(redId);
         Log.d("ResID", String.valueOf(redId));
-
-
-        setContentView(R.layout.activity_restaurant_details);
 
         //set variables so they can be assigned via query
         restname = (TextView) findViewById(R.id.txtRestaurantName);
@@ -119,7 +119,7 @@ public class RestaurantDetails extends AppCompatActivity {
         call.setOnClickListener(myOnClick_call());
         review.setOnClickListener(myOnClick_review());
         viewReview = (Button) findViewById(R.id.btnviewReviews);
-        back = (Button)findViewById(R.id.Title_back);
+        back = (Button)findViewById(R.id.resinfoTitle_back);
 
 
         //use this id in query to select restaurant details from db and display them
@@ -201,7 +201,7 @@ public class RestaurantDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(RestaurantDetails.this, viewReviews.class);
-                //intent2.putExtra("resid", UrlConfig.restid);
+
                 startActivity(intent2);
             }});
         back.setOnClickListener(new View.OnClickListener() {

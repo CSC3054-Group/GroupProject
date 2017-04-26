@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#ffff"
+        android:text="Restaurant Details"
+        android:textSize="25sp"
+        android:id="@+id/reinfoTitle_name"
+        android:gravity="center_horizontal|center"
+        android:singleLine="true"
+        />
+
+
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_bt"
+        android:id="@+id/resinfoTitle_back"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+
+        />
+
+</RelativeLayout>
