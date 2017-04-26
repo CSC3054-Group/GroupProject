@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.groupwork">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,35 +16,33 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/API_key"
-            />
-        <activity android:name=".activity.HomeScreen">
+            android:value="@string/API_key" />
 
+        <activity android:name=".activity.HomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.Register" />
-        <activity android:name=".activity.RestaurantDetails"/>
-        <activity android:name=".activity.UserHome"/>
+        <activity android:name=".activity.RestaurantDetails" />
+        <activity android:name=".activity.UserHome" />
         <activity android:name=".activity.Reviewpage" />
         <activity android:name=".activity.ForgotPassword" />
         <activity android:name=".activity.Login" />
         <activity android:name=".activity.IntentTest" />
         <activity android:name=".activity.MainLayoutActivity" />
         <activity android:name=".activity.UserActivity" />
-        <activity android:name=".activity.SearchActivity"></activity>
-        <activity android:name=".activity.MapActivity"/>
-
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.MapActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity android:name=".activity.viewReviews"></activity>
     </application>
 
 </manifest>
