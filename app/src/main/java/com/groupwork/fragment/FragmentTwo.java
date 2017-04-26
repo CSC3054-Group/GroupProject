@@ -97,7 +97,7 @@ public class FragmentTwo extends Fragment {
                         "AVG(revStarRating),resType,resPhoto from tbl_restaurants,tbl_restype,tbl_reviews,tbl_usersaved " +
                         "where tbl_restaurants.restId=tbl_reviews.restId " +
                         "and tbl_restaurants.resTypeId=tbl_restype.resTypeId " +
-                        "and tbl_usersaved.UserID=1 " +
+                        "and tbl_usersaved.UserID="+UrlConfig.userid+" " +
                         "and tbl_usersaved.restId=tbl_restaurants.restId " +
                         "GROUP BY tbl_restaurants.restId";
                 pw.write(sqlString);

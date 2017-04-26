@@ -8,39 +8,29 @@
     android:background="@drawable/rest">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Review this Restaurant"
-        android:id="@+id/textView2"
-        android:layout_marginTop="94dp"
-        android:textColor="#fffcfc"
-        android:textSize="37dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Say something about this restaurant..."
-        android:id="@+id/textView3"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/textView2"
-        android:textSize="25dp"
-        android:textColor="#fdfdfd" />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Submit"
+        android:id="@+id/buttonsub"
+        android:background="#b1b1b1"
+        android:textSize="20dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="29dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:id="@+id/txtaddreview"
-        android:layout_below="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:text="please type here.."
-        android:layout_alignParentEnd="true"
         android:textColor="#ffffff"
-        android:textSize="20dp" />
-
-
+        android:textSize="20dp"
+        android:hint="Enter Your Review"
+        android:layout_below="@+id/textView3"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="55dp"
+        android:layout_alignStart="@+id/textView2" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -48,20 +38,31 @@
         android:id="@+id/ratingPrice"
         style="@android:style/Widget.Holo.RatingBar.Indicator"
         android:numStars="5"
-        android:layout_above="@+id/textView3"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp" />
+        android:isIndicator="false"/>
 
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Submit"
-        android:id="@+id/buttonsub"
-        android:layout_marginTop="54dp"
-        android:background="#b1b1b1"
-        android:textSize="20dp"
-        android:layout_below="@+id/editText"
-        android:gravity="center_vertical|center_horizontal"
-        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review this Restaurant"
+        android:id="@+id/textView2"
+        android:layout_marginTop="32dp"
+        android:textColor="#fffcfc"
+        android:textSize="37dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Say something about this restaurant..."
+        android:id="@+id/textView3"
+        android:textSize="25dp"
+        android:textColor="#fdfdfd"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/ratingPrice"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
