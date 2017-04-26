@@ -47,7 +47,8 @@ public class RestaurantDetails extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton[] radioButtons;
     TextView rating;
-    String resname,resaddress,resdescription,resopeningtimes ,resphonenumber,resreview;
+    String resname,resaddress,resdescription,resopeningtimes ,resphonenumber,resreview,count;
+    int cnt;
     private GoogleApiClient client;
 
     Handler handler = new Handler(){
@@ -78,9 +79,12 @@ public class RestaurantDetails extends AppCompatActivity {
             else if(text.equals("saved")){
                 Log.d("Test", "inserted successfully");
                 Toast.makeText(getApplication(), "Saved!", Toast.LENGTH_SHORT).show();
-
-
             }
+            else if (text.equals("indb"))
+            {
+                Toast.makeText(getApplication(), "Res Already In DB!", Toast.LENGTH_SHORT).show();
+            }
+
         }
     };
 
@@ -193,9 +197,11 @@ public class RestaurantDetails extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String SelectedResid = UrlConfig.restid;
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
+                        // open thread to process network access request and response
                         Socket socket = null;
 
                         try {
@@ -204,23 +210,93 @@ public class RestaurantDetails extends AppCompatActivity {
                             OutputStream out = socket.getOutputStream();
                             PrintWriter pw = new PrintWriter(out);
                             //Input sql sentence which you want to execute
-                            String sqlString = "INSERT INTO tbl_usersaved (restid, UserId) VALUES ('"+  UrlConfig.restid +"','"+ UrlConfig.userid +"')";
+                            String sqlString = "Select Count(restId) as cnt from tbl_usersaved " +
+                                    "WHERE restId = '"+UrlConfig.restid+"' AND UserId = '"+UrlConfig.userid+"'";
                             pw.write(sqlString);
                             pw.flush();
                             socket.shutdownOutput();
+                            Log.d("Test", "transport successfully");
+                            //get response from server
 
-                            Message message = Message.obtain();
-                            message.obj = "saved";
-                            Log.d("resSaved","Saved");
-                            message.what = 1;  // obj and what is similar as value-key
-                            handler.sendMessage(message);// send message to handler
+                            InputStream is = socket.getInputStream();
+                            InputStreamReader isr = new InputStreamReader(is);
+                            BufferedReader br = new BufferedReader(isr);
+                            String info = "";
+                            String line = null;
+                            while ((line = br.readLine()) != null) {
+                                info = info + line;
+
+                            }
+
+                            //socket.shutdownInput();
+
+                            Log.d("Test", info);
+
+                            JSONArray array = new JSONArray(info);
+                            String Password = "";
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject object = array.getJSONObject(i);
+                                count = object.getString("cnt");
+
+                            }
+                            Log.d("count", count);
+                            int x = Integer.parseInt(count);
+
+                            if (x >0){
+                                Message message = Message.obtain();
+                                message.obj = "indb";
+                                message.what = 1;  // obj and what is similar as value-key
+                                handler.sendMessage(message);// send message to handler
+                            }
+                            else
+                            {
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Socket socket = null;
+
+                                        try {
+                                            socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                                            //Output data to Server
+                                            OutputStream out = socket.getOutputStream();
+                                            PrintWriter pw = new PrintWriter(out);
+                                            //Input sql sentence which you want to execute
+                                            String sqlString = "INSERT INTO tbl_usersaved (restid, UserId) VALUES ('"+  UrlConfig.restid +"','"+ UrlConfig.userid +"')";
+                                            pw.write(sqlString);
+                                            pw.flush();
+                                            socket.shutdownOutput();
+
+                                            Message message = Message.obtain();
+                                            message.obj = "saved";
+                                            Log.d("resSaved","Saved");
+                                            message.what = 1;  // obj and what is similar as value-key
+                                            handler.sendMessage(message);// send message to handler
+
+
+                                        } catch (Exception e) {
+
+                                        } finally {
+                                            try {
+                                                if(socket!=null){
+                                                    socket.close();
+                                                }
+//                                socket.shutdownInput();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                    }
+                                }).start();
+
+                            }
 
 
                         } catch (Exception e) {
 
                         } finally {
                             try {
-                                if(socket!=null){
+                                if (socket != null) {
                                     socket.close();
                                 }
 //                                socket.shutdownInput();
@@ -228,11 +304,8 @@ public class RestaurantDetails extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-
                     }
                 }).start();
-
-
             }
         });
 

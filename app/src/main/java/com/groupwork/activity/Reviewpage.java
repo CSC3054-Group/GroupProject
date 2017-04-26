@@ -35,19 +35,9 @@ public class Reviewpage extends AppCompatActivity {
         review = (EditText) findViewById(R.id.txtaddreview);
         ratebar = (RatingBar) findViewById(R.id.ratingPrice);
         submitreview = (Button) findViewById(R.id.buttonsub);
-        submitreview.setOnClickListener(myOnClick_submitreview());
+
         setContentView(R.layout.activity_reviewpage);
     }
 
-    protected View.OnClickListener myOnClick_submitreview() {
-        View.OnClickListener v = new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                //save review typed into textbox
-                //shave review given on ratingbar
-                //run insert query
-            }
-        }
-    }
 }
