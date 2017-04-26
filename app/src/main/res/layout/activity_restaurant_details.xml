@@ -10,56 +10,42 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/rest"
-    tools:context="com.groupwork.RestaurantDetails">
+    tools:context="com.groupwork.activity.RestaurantDetails">
 
-    <View
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/Title_back"
+        android:layout_width="30dp"
         android:layout_height="match_parent"
-        android:radius="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorPrimary" />
+        android:layout_alignBottom="@+id/btncall"
+        android:layout_alignStart="@+id/txtRestaurantName"
+
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back_bt" />
+
 
     <TextView
-        android:text="Restaurant Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/txtRestaurantName"
-        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant Name"
         android:textColor="@android:color/background_light"
-       />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginTop="63dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/lbldescription" />
 
     <TextView
-        android:text="Restaurant Address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtrestaurantaddress"
-        android:textSize="12sp"
-        android:layout_below="@+id/txtRestaurantName"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/background_light" />
-
-    <TextView
-        android:text="Opening Times:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/textView4"
-        android:textColor="@android:color/background_light"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/ratingOverall"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="Price:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/textView5"
+        android:layout_marginTop="87dp"
+        android:text="Opening Times:"
         android:textColor="@android:color/background_light"
-        android:layout_alignStart="@+id/ratingPrice" />
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/txttimes"
@@ -68,159 +54,92 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView4"
         android:text="Monday"
-        android:textColor="@android:color/background_light" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:radius="10dp"
-        android:background="@android:color/background_light"
-        android:scrollbarSize="2dp"
-        android:layout_marginTop="13dp"
-        android:layout_below="@+id/ratingOverall"
-        android:layout_alignParentStart="true" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:radius="2dp"
-        android:background="@android:color/background_light"
-        android:layout_above="@+id/radio_group"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="102dp"
-        android:id="@+id/view2" />
-
-    <RatingBar
-        android:id="@+id/ratingPrice"
-        style="@android:style/Widget.Holo.RatingBar.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView5"
-        android:numStars="3"
-        android:rating="2" />
-
-    <RadioGroup
-        android:id="@+id/radio_group_sr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checkedButton="@+id/rButton_popular"
-        android:orientation="horizontal"
-        android:layout_above="@+id/radio_group"
-        android:layout_alignParentStart="true">
-
-        <RadioButton
-            android:id="@+id/rButton_call"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="false"
-            android:drawableTop="@mipmap/ic_phone"
-            android:gravity="center"
-            android:text="@string/text_call"
-            android:textColor="#929292"
-            />
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
-
-        <RadioButton
-            android:id="@+id/rButton_review"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/slt_bg_category"
-            android:gravity="center"
-            android:text="@string/text_review"
-            android:textColor="@color/slt_btn_color" />
-
-
-        <RadioButton
-            android:id="@+id/rButton_save"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/icon_favorite_batch_grey"
-            android:gravity="center"
-            android:text="@string/text_save"
-            android:textColor="@color/slt_btn_color" />
-    </RadioGroup>
-
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ratingOverall"
-        style="@android:style/Widget.Holo.Light.RatingBar.Indicator"
-        android:numStars="5"
-        android:layout_below="@+id/txtrestaurantaddress"
-        android:layout_alignParentStart="true" />
-
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:checkedButton="@+id/rButton_popular"
-        android:orientation="horizontal">
-
-
-
-        <RadioButton
-            android:id="@+id/rButton_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/slt_bg_category"
-            android:gravity="center"
-            android:text="Saved Places"
-            android:textColor="@color/slt_btn_color" />
-
-        <RadioButton
-            android:id="@+id/rButton_Nearby"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/slt_bg_location"
-            android:gravity="center"
-            android:text="@string/text_location"
-            android:textColor="@color/slt_btn_color" />
-
-        <RadioButton
-            android:id="@+id/rButton_user"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/slt_bg_user"
-            android:gravity="center"
-            android:text="@string/text_user"
-            android:textColor="@color/slt_btn_color" />
-    </RadioGroup>
 
     <TextView
         android:id="@+id/lbldescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txttimes"
-        android:layout_marginTop="72dp"
         android:text="Something about this place:"
-        android:textColor="@color/White" />
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/txttimes"
+        android:layout_alignStart="@+id/txtDescription"
+        android:layout_marginTop="15dp" />
 
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/view2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbldescription"
         android:text="text description"
-        android:textColor="@color/White" />
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/lbldescription"
+        android:layout_alignEnd="@+id/textView4" />
+
+    <Button
+        android:id="@+id/btncall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="2dp"
+        android:background="@mipmap/ic_phone"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/btnsave" />
+
+    <Button
+        android:id="@+id/btnreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review"
+        android:layout_above="@+id/btnviewReviews"
+        android:layout_alignStart="@+id/btnviewReviews"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/btnsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_favorite_batch_grey"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="Rating (stars):"
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/txtRestaurantName"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/txtvrating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_toEndOf="@+id/textView6"
+        android:text="5"
+        android:textColor="@color/White"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnviewReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Reviews"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/txtDescription" />
 
 
 </RelativeLayout>

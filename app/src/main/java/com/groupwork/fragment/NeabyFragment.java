@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.groupwork.R;
-import com.groupwork.RestaurantDetails;
+import com.groupwork.activity.RestaurantDetails;
 import com.groupwork.activity.IntentTest;
 import com.groupwork.activity.MapActivity;
 import com.groupwork.adapter.NearbyListAdapter;
