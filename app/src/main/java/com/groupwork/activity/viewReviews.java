@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +71,9 @@ public class viewReviews extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent  = new Intent(viewReviews.this,RestaurantDetails.class);
-                intent.putExtra("resId",UrlConfig.restid);
+
+                intent.putExtra("resId",Integer.valueOf(UrlConfig.restid));
+                Log.d("ResID",UrlConfig.restid);
                 startActivity(intent);
             }
         });
