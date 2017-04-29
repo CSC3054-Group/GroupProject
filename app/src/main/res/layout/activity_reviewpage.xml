@@ -6,31 +6,51 @@
     android:layout_height="match_parent"
     tools:context="com.groupwork.activity.Reviewpage"
     android:background="@drawable/rest">
+    <include layout="@layout/resinfo_title"
+        android:id="@+id/Return"/>
 
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="Submit"
+        android:layout_width="108dp"
+        android:layout_height="90dp"
         android:id="@+id/buttonsub"
-        android:background="#b1b1b1"
+        android:background="@drawable/submit"
         android:textSize="20dp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp" />
+        android:layout_marginBottom="36dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:id="@+id/txtaddreview"
-        android:textColor="#ffffff"
-        android:textSize="20dp"
         android:hint="Enter Your Review"
-        android:layout_below="@+id/textView3"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_marginTop="55dp"
-        android:layout_alignStart="@+id/textView2" />
+        android:textAlignment="center"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/color_white"
+        android:textColorHint="@color/White"
+
+
+        android:layout_above="@+id/buttonsub"
+        android:layout_alignStart="@+id/tv_reviewbanner"
+        android:layout_marginBottom="20dp"
+        android:layout_alignEnd="@+id/tv_reviewbanner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review this Restaurant"
+        android:id="@+id/tv_reviewbanner"
+        android:layout_marginTop="15dp"
+        android:textColor="#44d1ff"
+        android:textSize="35sp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_below="@+id/Return"
+        android:layout_centerHorizontal="true" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -38,31 +58,23 @@
         android:id="@+id/ratingPrice"
         style="@android:style/Widget.Holo.RatingBar.Indicator"
         android:numStars="5"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/textView2"
+        android:isIndicator="false"
+        android:layout_below="@+id/tv_reviewbanner"
         android:layout_centerHorizontal="true"
-        android:isIndicator="false"/>
+        android:layout_marginTop="27dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Review this Restaurant"
-        android:id="@+id/textView2"
+        android:text="Have Your Say"
+        android:id="@+id/tv_reviewtitle"
+        android:textSize="35sp"
+        android:textColor="#44d1ff"
         android:layout_marginTop="32dp"
-        android:textColor="#fffcfc"
-        android:textSize="37dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Say something about this restaurant..."
-        android:id="@+id/textView3"
-        android:textSize="25dp"
-        android:textColor="#fdfdfd"
-        android:layout_marginTop="25dp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
         android:layout_below="@+id/ratingPrice"
-        android:layout_alignParentStart="true" />
+        android:layout_alignStart="@+id/txtaddreview"
+        android:layout_alignEnd="@+id/txtaddreview" />
 
 </RelativeLayout>

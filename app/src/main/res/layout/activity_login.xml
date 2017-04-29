@@ -8,20 +8,6 @@
     android:background="@drawable/rest"
     >
 
-    <TextView
-        android:id="@+id/tv_noaccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dont Have An Account Click Here"
-        android:textAlignment="center"
-        android:textColor="@color/color_white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btn_login"
-        android:layout_marginBottom="49dp"
-        android:layout_alignEnd="@+id/btn_login" />
-
     <ImageView
         android:id="@+id/logo"
         android:layout_width="150dp"
@@ -88,7 +74,6 @@
         android:id="@+id/btn_login"
         android:layout_width="270dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/buttonshape"
         android:elevation="0dp"
         android:shadowColor="#1745FF"
@@ -100,8 +85,37 @@
         android:textAllCaps="false"
         android:textColor="@color/color_white"
         android:textSize="24sp"
+        android:layout_below="@+id/et_pword_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:id="@+id/tv_noaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Account? Register Now"
+        android:textAlignment="center"
+        android:textColor="@color/color_white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="27dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_login"
+        android:layout_alignEnd="@+id/btn_login" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_login_forgotpassword"
         android:layout_above="@+id/tv_noaccount"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/tv_noaccount"
+        android:layout_marginBottom="16dp"
+        android:layout_alignEnd="@+id/tv_noaccount"
+        android:text="ForgotPassword? Tap Here"
+        android:textAlignment="center"
+        android:textColor="@color/color_white"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
 
 </RelativeLayout>

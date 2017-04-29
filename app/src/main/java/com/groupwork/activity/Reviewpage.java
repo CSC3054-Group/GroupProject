@@ -1,5 +1,6 @@
 package com.groupwork.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +26,9 @@ import java.net.Socket;
 
 public class Reviewpage extends AppCompatActivity {
     RatingBar ratebar;
+    TextView reviewbanner, reviewtitle;
     EditText review;
-    Button submitreview;
+    Button submitreview ,back;
     float ratingvalue =0;
     private GoogleApiClient client;
     Handler handler = new Handler(){
@@ -38,8 +40,9 @@ public class Reviewpage extends AppCompatActivity {
 
             if(text.equals("ReviewInsertToDb"))
             {
-
                 Toast.makeText(getApplication(), "Review Successfully Posted Thanks!", Toast.LENGTH_SHORT).show();
+                review.setText("");
+                ratebar.setRating(0);
             }
             if(text.equals("Blank"))
             {
@@ -59,6 +62,10 @@ public class Reviewpage extends AppCompatActivity {
         review = (EditText) findViewById(R.id.txtaddreview);
         ratebar = (RatingBar) findViewById(R.id.ratingPrice);
         submitreview = (Button) findViewById(R.id.buttonsub);
+        reviewbanner = (TextView)findViewById(R.id.tv_reviewbanner);
+        //back =(Button) = (Button)findViewById(R.id.Return);
+        reviewbanner.setText("Review " + UrlConfig.passrestaruntname);
+
 
 
 

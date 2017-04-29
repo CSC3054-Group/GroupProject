@@ -58,8 +58,6 @@ public class Register extends AppCompatActivity {
                 iv_secquestion.setVisibility(View.VISIBLE);
                 iv_pword.setVisibility(View.VISIBLE);
                 verifyemail.setText("Email Available");
-
-
             }
         }
     };
@@ -74,7 +72,7 @@ public class Register extends AppCompatActivity {
             //textview feedback
             Log.d("Test2",text);
             if(text.equals("RegisterSuccess"))
-            {
+            {   UrlConfig.Emailfromregister = email.getText().toString();
                 Intent register = new Intent(Register.this, Login.class);
                 startActivity(register);
             }
@@ -204,16 +202,16 @@ public class Register extends AppCompatActivity {
                 if(currentemailvalue.equals(Useremailvalue))
                 {
 
-                    Toast.makeText(getApplication(), "You have successfully Registered go to login", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication(), "You have successfully Registered go to login", Toast.LENGTH_LONG).show();
                     runsql = "True";
-                    Toast.makeText(getApplication(), "RunSql Value is " + runsql, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication(), "RunSql Value is " + runsql, Toast.LENGTH_LONG).show();
 
 
                 }
                 else
                 {
                     Toast.makeText(getApplication(), "Your Email Address Has changed since the last validation", Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplication(), "Please ReEnter Your Email Address An Validate It", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplication(), "Please Reenter Your Email Address An Validate It", Toast.LENGTH_LONG).show();
                     verifyemail.setText("Check Email Availability");
                     Log.d("CurrentEmail is",currentemailvalue);
                     Log.d("ValidatedEmail is",Useremailvalue);
@@ -232,7 +230,7 @@ public class Register extends AppCompatActivity {
                 if(runsql.equals("True"))
                 {
 
-                    Toast.makeText(getApplication(), "Run Insert query ", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplication(), "Run Insert query ", Toast.LENGTH_LONG).show();
                     final String fname = forename.getText().toString();
                     Log.d("forename is ",fname);
                     final String sname = surname.getText().toString();

@@ -12,7 +12,7 @@ import com.groupwork.R;
 
 public class HomeScreen extends AppCompatActivity {
     Button login , register;
-    TextView forgotpassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,6 @@ public class HomeScreen extends AppCompatActivity {
 
         login = (Button)findViewById(R.id.btn_HomeScreen_Login);
         register = (Button)findViewById(R.id.btn_homescreen_register);
-        forgotpassword = (TextView)findViewById(R.id.tv_homescreen_forgotpassword);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,15 +35,6 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent register = new Intent(HomeScreen.this, Register.class);
                 startActivity(register);
-            }
-        });
-
-        forgotpassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent forgotpassword = new Intent(HomeScreen.this, ForgotPassword.class);
-                startActivity(forgotpassword);
-
             }
         });
 

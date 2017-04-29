@@ -28,7 +28,8 @@ import java.net.Socket;
 
 public class Login extends AppCompatActivity {
 
-    TextView noaccount,uname ,pword;
+    TextView noaccount,uname ,pword, forgotpassword;
+
     Button login ;
     String dbUserId ,dbForename, dbSurname,dbEmail,dbUserPassword,dbSQ,dbSA;
 
@@ -43,16 +44,7 @@ public class Login extends AppCompatActivity {
             if(text.equals("SUCCESS"))
             {
                 Log.d("Test2","enter into handle");
-                //Intent LoginSuccess = new Intent(Login.this, HomeScreen.class);
-                //LoginSuccess.putExtra("UserId",dbUserId);
-                //LoginSuccess.putExtra("Forename",dbForename);
-                //LoginSuccess.putExtra("Surname",dbSurname);
-                //LoginSuccess.putExtra("Email",dbEmail);
-                //LoginSuccess.putExtra("Password",dbUserPassword);
-                //LoginSuccess.putExtra("dbsq",dbSQ);
-                //LoginSuccess.putExtra("dbsa",dbSA);
-                //startActivity(LoginSuccess);
-                Toast.makeText(getApplication(), "Login Success. Go To The HomePage Of App", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplication(), "Login Success. Go To The HomePage Of App", Toast.LENGTH_LONG).show();
                 Intent login = new Intent(Login.this, MainLayoutActivity.class);
                 startActivity(login);
 
@@ -79,6 +71,24 @@ public class Login extends AppCompatActivity {
         uname = (TextView)findViewById(R.id.et_uname_login);
         pword = (TextView)findViewById(R.id.et_pword_login);
         login = (Button)findViewById(R.id.btn_login);
+        forgotpassword = (TextView)findViewById((R.id.tv_login_forgotpassword));
+        String emailfromurlconfig = UrlConfig.Emailfromregister;
+        if(emailfromurlconfig != null)
+        {
+            uname.setText(emailfromurlconfig);
+        }
+        else if(emailfromurlconfig == null)
+        {
+            uname.setText("");
+        }
+
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgetpassword = new Intent(Login.this, ForgotPassword.class);
+                startActivity(forgetpassword);
+            }
+        });
 
 
         noaccount.setOnClickListener(new View.OnClickListener() {

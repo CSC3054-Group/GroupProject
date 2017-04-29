@@ -38,7 +38,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class RestaurantDetails extends AppCompatActivity {
-    TextView restname;
+    TextView restname,reiviewleftby,latestreiew;
     //TextView restAddress;
     TextView restdesc;
     TextView opTimes;
@@ -52,6 +52,10 @@ public class RestaurantDetails extends AppCompatActivity {
     TextView rating;
     String resname,resaddress,resdescription,resopeningtimes ,resphonenumber,resreview,count;
     int cnt;
+    RatingBar ratings,latestreviewrating;
+    String dbrating,dbfname,dbreviewtext;
+
+
     private GoogleApiClient client;
 
     Handler handler = new Handler(){
@@ -61,15 +65,13 @@ public class RestaurantDetails extends AppCompatActivity {
             //textview feedback
             Log.d("Test2",text);
             if(text.equals("DatabaseReadSuccessful"))
-            {
-
-
-                UrlConfig.restaurantnumber = resphonenumber;
+            {   UrlConfig.restaurantnumber = resphonenumber;
                 restname.setText(resname);
-                //restAddress.setText(resaddress);
                 opTimes.setText(resopeningtimes);
                 restdesc.setText(resdescription);
-                rating.setText(resreview);
+                float rating = Float.parseFloat(resreview);
+                Log.d("ratingval", String.valueOf(rating));
+                ratings.setRating(rating);
             }
             else if (text.equals("AlreadySaved"))
             {
@@ -88,6 +90,14 @@ public class RestaurantDetails extends AppCompatActivity {
             {
                 Toast.makeText(getApplication(), "Res Already In DB!", Toast.LENGTH_SHORT).show();
             }
+            else if (text.equals("latestreviewread"))
+            {
+                reiviewleftby.setText(dbfname + " Said:");
+                latestreiew.setText(dbreviewtext);
+                float rating = Float.parseFloat(dbrating);
+                Log.d("ratingval", String.valueOf(rating));
+                latestreviewrating.setRating(rating);
+            }
 
         }
     };
@@ -105,13 +115,9 @@ public class RestaurantDetails extends AppCompatActivity {
         UrlConfig.restid = String.valueOf(redId);
         Log.d("ResID", String.valueOf(redId));
 
-        //set variables so they can be assigned via query
+
         restname = (TextView) findViewById(R.id.txtRestaurantName);
-        //restAddress = (TextView) findViewById(R.id.txtrestaurantaddress);
-        //rOverall = (RatingBar) findViewById(R.id.ratingOverall);
         opTimes = (TextView) findViewById(R.id.txttimes);
-        //number = (TextView) findViewById(R.id.textView16);
-        rating = (TextView) findViewById(R.id.txtvrating);
         restdesc = (TextView) findViewById(R.id.txtDescription);
         save = (Button) findViewById(R.id.btnsave);
         call = (Button) findViewById(R.id.btncall);
@@ -120,6 +126,81 @@ public class RestaurantDetails extends AppCompatActivity {
         review.setOnClickListener(myOnClick_review());
         viewReview = (Button) findViewById(R.id.btnviewReviews);
         back = (Button)findViewById(R.id.resinfoTitle_back);
+        ratings = (RatingBar)findViewById(R.id.rating);
+
+        reiviewleftby =(TextView) findViewById(R.id.tv_reviewleftby);
+        latestreiew = (TextView) findViewById(R.id.tv_reviewlatest);
+        latestreviewrating = (RatingBar)findViewById(R.id.ratingBar5);
+
+        //thred to find the latest review
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("treadenterddb", "entered thread");
+                // open thread to process network access request and response
+                Socket socket = null;
+
+                try {
+                    socket = new Socket(UrlConfig.Socket_IP, UrlConfig.Socket_PORT);
+                    //Output data to Server
+                    OutputStream out = socket.getOutputStream();
+                    PrintWriter pw = new PrintWriter(out);
+                    String sqlString ="SELECT revStarRating,concat(Forename , ' ' ,Surname) AS FullName ,tbl_reviews.revText,tbl_reviews.revId,tbl_reviews.restId from tbl_reviews INNER JOIN tbl_users on tbl_users.UserId = tbl_reviews.UserId INNER JOIN tbl_restaurants on tbl_restaurants.restId = tbl_reviews.restId  WHERE tbl_restaurants.restId = '"+UrlConfig.restid+"' ORDER BY revId DESC LIMIT 1";
+                    //String sqlString = "SE;
+                    Log.d("latestrevew","sqlhit");
+                    pw.write(sqlString);
+                    pw.flush();
+                    socket.shutdownOutput();
+                    Log.d("Test", "transport successfully");
+
+
+                    //get response from server
+                    InputStream is = socket.getInputStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+                    String info = "";
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        info = info + line;
+
+                    }
+
+                    //socket.shutdownInput();
+
+                    Log.d("Test", info);
+
+                    JSONArray array = new JSONArray(info);
+
+                    for (int i = 0; i < array.length(); i++) {
+                        JSONObject object = array.getJSONObject(i);
+
+                        dbrating = object.getString("revStarRating");
+                        Log.d("dbreview",dbrating);
+                        dbfname = (object.getString("FullName"));
+                        Log.d("dbfname", dbfname);
+                        dbreviewtext = (object.getString("revText"));
+                        Log.d("dbreview",dbreviewtext);
+                        Message message = Message.obtain();
+                        message.obj = "latestreviewread";
+                        message.what = 1;  // obj and what is similar as value-key
+                        handler.sendMessage(message);// send message to handler
+                    }
+                    Log.d("Test2", "successful");
+
+                } catch (Exception e) {
+
+                } finally {
+                    try {
+                        if (socket != null) {
+                            socket.close();
+                        }
+//                                socket.shutdownInput();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
 
 
         //use this id in query to select restaurant details from db and display them
@@ -170,6 +251,7 @@ public class RestaurantDetails extends AppCompatActivity {
 
                         resphonenumber = object.getString("resNumber");
                         resname = (object.getString("resName"));
+                        UrlConfig.passrestaruntname =(object.getString("resName"));
                         resaddress = (object.getString("resLocation"));
                         resopeningtimes = (object.getString("resDTimes"));
                         resdescription = (object.getString("resDText"));
@@ -201,8 +283,8 @@ public class RestaurantDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(RestaurantDetails.this, viewReviews.class);
-
                 startActivity(intent2);
+
             }});
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -326,6 +408,10 @@ public class RestaurantDetails extends AppCompatActivity {
                 }).start();
             }
         });
+
+
+
+
 
 
     }

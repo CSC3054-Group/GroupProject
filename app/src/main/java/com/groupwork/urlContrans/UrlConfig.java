@@ -21,6 +21,8 @@ public class UrlConfig {
     public static String securityanswer = null;
     public static String restaurantnumber = null;
     public static String restid = null;
+    public static String Emailfromregister = null;
+    public static String passrestaruntname = null;
 
 
 
