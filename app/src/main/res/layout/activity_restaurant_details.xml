@@ -137,41 +137,39 @@
             android:textColor="#44d1ff"
             android:textSize="26sp" />
 
+        <TextView
+            android:text="Left By"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_reviewleftby"
+            android:textAlignment="textStart"
+            android:textColor="@color/White"
+            android:textStyle="normal|bold|italic"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ratingBar5" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar5"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:rating="5"
+            android:layout_below="@+id/tv_latestreview"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_reviewlatest"
+            android:textColor="@color/White"
+            android:textAlignment="textStart"
+            android:layout_below="@+id/ratingBar5"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="21dp" />
+
 
     </RelativeLayout>
-
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ratingBar5"
-        style="@style/Widget.AppCompat.RatingBar.Small"
-        android:rating="5"
-        android:layout_above="@+id/tv_reviewleftby"
-        android:layout_alignStart="@+id/tv_reviewlatest" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="49dp"
-        android:id="@+id/tv_reviewlatest"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/White"
-        android:textAlignment="textStart" />
-
-    <TextView
-        android:text="Left By"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_reviewleftby"
-        android:textAlignment="textStart"
-        android:textColor="@color/White"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/tv_reviewlatest"
-        android:layout_alignStart="@+id/ratingBar5"
-        android:textStyle="normal|bold|italic" />
 
 
 </RelativeLayout>

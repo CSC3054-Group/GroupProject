@@ -111,9 +111,22 @@ public class RestaurantDetails extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_restaurant_details);
         Intent intent = getIntent();
-        int redId = intent.getIntExtra("resId", 0);
-        UrlConfig.restid = String.valueOf(redId);
-        Log.d("ResID", String.valueOf(redId));
+        String s = getIntent().getStringExtra("restaruntid");
+        if  (s != null)
+        {   //gets postback from review page
+            int newS = Integer.parseInt(s);
+            UrlConfig.restid = String.valueOf(newS);
+            Log.d("ResID", String.valueOf(newS));
+        }
+        else
+        {
+            int redId = intent.getIntExtra("resId", 0);
+            UrlConfig.restid = String.valueOf(redId);
+            Log.d("ResID", String.valueOf(redId));
+
+        }
+
+
 
 
         restname = (TextView) findViewById(R.id.txtRestaurantName);
@@ -131,6 +144,12 @@ public class RestaurantDetails extends AppCompatActivity {
         reiviewleftby =(TextView) findViewById(R.id.tv_reviewleftby);
         latestreiew = (TextView) findViewById(R.id.tv_reviewlatest);
         latestreviewrating = (RatingBar)findViewById(R.id.ratingBar5);
+
+
+
+
+
+
 
         //thred to find the latest review
         new Thread(new Runnable() {

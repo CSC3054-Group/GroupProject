@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.URL;
 
 public class Reviewpage extends AppCompatActivity {
     RatingBar ratebar;
@@ -43,6 +44,10 @@ public class Reviewpage extends AppCompatActivity {
                 Toast.makeText(getApplication(), "Review Successfully Posted Thanks!", Toast.LENGTH_SHORT).show();
                 review.setText("");
                 ratebar.setRating(0);
+                Intent resdetails = new Intent(Reviewpage.this, RestaurantDetails.class);
+                resdetails.putExtra("restaruntid", UrlConfig.restid);
+                Log.d("resvaluefromreviewpage","");
+                startActivity(resdetails);
             }
             if(text.equals("Blank"))
             {

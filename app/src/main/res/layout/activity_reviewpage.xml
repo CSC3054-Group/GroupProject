@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.groupwork.activity.Reviewpage"
     android:background="@drawable/rest">
+
     <include layout="@layout/resinfo_title"
         android:id="@+id/Return"/>
 
 
     <Button
         android:layout_width="108dp"
-        android:layout_height="90dp"
+        android:layout_height="80dp"
         android:id="@+id/buttonsub"
         android:background="@drawable/submit"
         android:textSize="20dp"
