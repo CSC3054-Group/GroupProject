@@ -7,7 +7,7 @@
     tools:context="com.groupwork.activity.Reviewpage"
     android:background="@drawable/rest">
 
-    <include layout="@layout/resinfo_title"
+    <include layout="@layout/review_title"
         android:id="@+id/Return"/>
 
 
@@ -62,7 +62,8 @@
         android:isIndicator="false"
         android:layout_below="@+id/tv_reviewbanner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp" />
+        android:layout_marginTop="27dp"
+        android:backgroundTint="@android:color/holo_blue_bright" />
 
     <TextView
         android:layout_width="wrap_content"

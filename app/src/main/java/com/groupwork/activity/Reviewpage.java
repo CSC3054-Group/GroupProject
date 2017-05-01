@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -63,6 +64,7 @@ public class Reviewpage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_reviewpage);
         review = (EditText) findViewById(R.id.txtaddreview);
         ratebar = (RatingBar) findViewById(R.id.ratingPrice);
@@ -71,7 +73,16 @@ public class Reviewpage extends AppCompatActivity {
         //back =(Button) = (Button)findViewById(R.id.Return);
         reviewbanner.setText("Review " + UrlConfig.passrestaruntname);
 
+        Button review_back = (Button) findViewById(R.id.reviewTitle_back);
+        review_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Reviewpage.this,RestaurantDetails.class);
+                intent.putExtra("restaruntid",UrlConfig.restid);
+                startActivity(intent);
 
+            }
+        });
 
 
         ratebar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
